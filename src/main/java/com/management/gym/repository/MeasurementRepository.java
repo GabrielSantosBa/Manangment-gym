@@ -1,14 +1,8 @@
 package com.management.gym.repository;
 
-import java.time.LocalDate;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import com.management.gym.model.Measurements;
-import com.management.gym.model.Student;
 
 public interface MeasurementRepository extends JpaRepository<Measurements, Long>{
 

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.management.gym.model.Measurements;
 import com.management.gym.model.Student;
 import com.management.gym.model.dto.StudentDTO;
 import com.management.gym.model.dto.StudentMeasurementDTO;
@@ -65,21 +66,26 @@ public class StudentService  {
 	public Student createStudent(Student student) {
 		
 		student.setContacts(contactStudentRepository.saveAll(student.getContacts()));
-		
 		student.setMeasurements(measurementRepository.saveAll(student.getMeasurements()));
-		
 		
 		return studentRepository.save(student);
 	}
 	
 //	//Atualizar Measumentes de um student já cadastrado
-//		public Student updateMeasumenteStudent(Long id) {
+//		public Student updateMeasumenteStudent(Long id, Measurements measurement) {
 //			
+//			//receber medidas via ResponseBody - ok
+//			// recuperar o student pelo id que chegou no ResponseBody - ok
+//			// setar a nova medida no aluno recuperado
+//			// salvar atualizando a medida do novo aluno com a medida nova que chegou via ResponseBody
 //			
-//			var student = studentRepository.findById(id);
-//					
+//			var student = studentRepository.findById(id).get();
+//			
+//			if(student != null){
+//				student.getMeasurements().add(measurement);
+//			}
+//			
 //			student.setMeasurements(measurementRepository.saveAll(student.getMeasurements()));
-//			
 //			
 //			return studentRepository.save(student);
 //		}
