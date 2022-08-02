@@ -1,5 +1,7 @@
 package com.management.gym.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -52,28 +54,13 @@ public class StudentController {
 			@RequestParam(value = "minPeriod") String minPeriod,
 			@RequestParam(value = "maxPeriod") String maxPeriod){
 		
-		//TODO fazer tratamento Handler
-		if(studentService.listById(id) == null) {
-			return ResponseEntity.notFound().build();
-		}
-				
 		return ResponseEntity.ok().body(studentService.listMeasurementByPeriod(minPeriod, maxPeriod, id));
 	}
 	
 	
 	@PostMapping
-	public ResponseEntity<Student> createStudent(@RequestBody Student student){
+	public ResponseEntity<Student> createStudent(@RequestBody @Valid Student student){
 		return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(student));
 	}
-	
-//	@PutMapping("/{id}")
-//	public ResponseEntity<Student> updateStudent(@PathVariable("id") Long id){
-//		
-//		
-//		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(studentService.updateMeasumenteStudent(id));
-//		
-//		
-//	}
-	
 	
 }

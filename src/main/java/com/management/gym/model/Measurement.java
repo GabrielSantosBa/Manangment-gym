@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "tb_measurements")
-public class Measurements implements Serializable {
+public class Measurement implements Serializable {
 
 	
 	

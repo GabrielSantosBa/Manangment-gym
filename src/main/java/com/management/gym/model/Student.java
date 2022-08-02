@@ -33,7 +33,7 @@ import lombok.Setter;
 @Entity(name = "tb_students") 
 public class Student implements Serializable{
 
-	
+	//TODO usar validations nos principais campos aqui...
 	private static final long serialVersionUID = 4489958219071898520L;
 
 	@Id 
@@ -51,7 +51,7 @@ public class Student implements Serializable{
 	
 	@OneToMany
 	@JoinColumn(name = "ID_ALUNO")
-	private List<Measurements> measurements;
+	private List<Measurement> measurements;
 	
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate birthDate;
