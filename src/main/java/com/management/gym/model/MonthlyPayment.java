@@ -37,8 +37,10 @@ public class MonthlyPayment implements Serializable {
 	
 	private static final long serialVersionUID = 6821647203784981686L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	
 	@EqualsAndHashCode.Include
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name = "id_monthly_payment")
 	private Integer id;
 	
 	@DateTimeFormat(iso =ISO.DATE )
@@ -59,7 +61,7 @@ public class MonthlyPayment implements Serializable {
 
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_STUDENT")
+	@JoinColumn(name = "FK_STUDENT")
 	private Student  Student;
 	
 	

@@ -3,6 +3,7 @@ package com.management.gym.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Measurement implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@EqualsAndHashCode.Include
+	@Column(name = "id_measurement")
 	private Integer id;
 	
 	private double height;

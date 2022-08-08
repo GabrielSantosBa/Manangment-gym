@@ -2,6 +2,7 @@ package com.management.gym.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Contacts implements Serializable{
 
 	@EqualsAndHashCode.Include	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name = "id_contact")
 	private Integer id;
 	
 	private String instagram;	

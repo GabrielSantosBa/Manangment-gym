@@ -38,6 +38,7 @@ public class Student implements Serializable{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name = "id_student")
 	private Long id;	//TODO Usar UUID como tipo ao invés de Integer.
 	
 	private String name;
@@ -46,17 +47,17 @@ public class Student implements Serializable{
 	private SexoEnum sex;	
 	
 	@OneToMany
-	@JoinColumn(name = "ID_ALUNO")
+	@JoinColumn(name = "FK_STUDENT")
 	private List<Contacts> contacts;
 	
 	@OneToMany
-	@JoinColumn(name = "ID_ALUNO")
+	@JoinColumn(name = "FK_STUDENT")
 	private List<Measurement> measurements;
 	
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate birthDate;
 	
-	@Column(name = "status", columnDefinition = "boolean default true")
+	@Column(name = "situation_training", columnDefinition = "boolean default true")
 	private boolean status = true;
 
 	
