@@ -25,11 +25,17 @@ public class MonthlyPaymentController {
 	private final MonthlyPaymentService monthlyPaymentService;
 	
 	@GetMapping("/delayed-payments/{id}")
-	public Page<MonthlyPayment> listsAllStudentsWithLatePayment(
+	public Page<MonthlyPayment> listsAllStudentsWithStatusPayment(
 			@PathVariable("id") Long id, 
 			@RequestParam FinancialStatusEnum status, 
 			Pageable pageable){
 		return monthlyPaymentService.findAllStudentsWithLatePayment(id, status, pageable);
+	}
+	
+
+	@GetMapping("/delayed-payments")
+	public Page<MonthlyPayment> listsAllMonthlyPaymentLate(Pageable pageable){
+		return monthlyPaymentService.findAllStudentsMonthlyPaymentLate(pageable);
 	}
 	
 //	@GetMapping("/status")

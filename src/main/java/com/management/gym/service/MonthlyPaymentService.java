@@ -32,6 +32,12 @@ public class MonthlyPaymentService  {
 	public Page<MonthlyPayment> findAllStudentsWithLatePayment(Long id, FinancialStatusEnum status, Pageable pageable ) {
 		return monthlyPaymentRepository.findStudentWithLatePayment(id, status.toString(), pageable);
 	}
+
+
+	public Page<MonthlyPayment> findAllStudentsMonthlyPaymentLate(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return monthlyPaymentRepository.findAllAccountsLatePayment(pageable);
+	}
 	
 	
 }
