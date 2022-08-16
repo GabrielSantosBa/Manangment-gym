@@ -53,16 +53,31 @@ public class MonthlyPayment implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private FormOfPaymentEnum formOfPayment;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "status")
-	private FinancialStatusEnum financialStatusEnum;	
+
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private FinancialStatusEnum financialStatusEnum;	
+//	
+	private Integer financialStatusEnum;
+
 	
 	private Integer daysLatePayment;
 
 	
 	@ManyToOne
 	@JoinColumn(name = "FK_STUDENT")
-	private Student  Student;
+	private Student student;
 	
+	
+	public FinancialStatusEnum getFinancialStatusEnum() {
+		return FinancialStatusEnum.valueOf(financialStatusEnum);
+	}
+	
+	public void setFinancialStatusEnum(FinancialStatusEnum financialStatusEnum) {
+		if(financialStatusEnum != null) {
+			this.financialStatusEnum = financialStatusEnum.getCode();
+		}
+	}
 	
 }
