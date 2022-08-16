@@ -24,5 +24,4 @@ public interface MonthlyPaymentRepository extends JpaRepository<Student, Long>{
 			+ " WHERE payment.financialStatusEnum = 2")
 	public Page<MonthlyPaymentDTO> findAllAccountsLatePayment(Pageable pageable);
 	
-	
 }

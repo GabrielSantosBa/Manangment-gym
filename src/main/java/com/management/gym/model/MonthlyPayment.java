@@ -3,6 +3,7 @@ package com.management.gym.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,51 +34,49 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class MonthlyPayment implements Serializable {
 
-	
-	
 	private static final long serialVersionUID = 6821647203784981686L;
 
-	
 	@EqualsAndHashCode.Include
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_monthly_payment")
-	private Integer id;
-	
-	@DateTimeFormat(iso =ISO.DATE )
+	private Long id;
+
+	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate paymentDate = LocalDate.now();
+
 	
 	private BigDecimal monthlyfee;
-	
-	
-	@Enumerated(EnumType.STRING)
-	private FormOfPaymentEnum formOfPayment;
-	
 
-	
-//	@Enumerated(EnumType.STRING)
-//	@Column(name = "status")
-//	private FinancialStatusEnum financialStatusEnum;	
-//	
+	private Integer formOfPayment;
+
 	private Integer financialStatusEnum;
 
-	
 	private Integer daysLatePayment;
 
-	
 	@ManyToOne
 	@JoinColumn(name = "FK_STUDENT")
 	private Student student;
-	
-	
-	public FinancialStatusEnum getFinancialStatusEnum() {
+
+	public FinancialStatusEnum getSexoEnum() {
 		return FinancialStatusEnum.valueOf(financialStatusEnum);
 	}
-	
-	public void setFinancialStatusEnum(FinancialStatusEnum financialStatusEnum) {
-		if(financialStatusEnum != null) {
+
+	public void setSexoEnum(FinancialStatusEnum financialStatusEnum) {
+		if (financialStatusEnum != null) {
 			this.financialStatusEnum = financialStatusEnum.getCode();
 		}
 	}
-	
+
+	public FormOfPaymentEnum getFormOfPaymentEnum() {
+		return FormOfPaymentEnum.valueOfFormPaymentEnum(formOfPayment);
+	}
+
+	public void setFinancialStatusEnum(FormOfPaymentEnum formOfPaymentEnum) {
+		if (formOfPaymentEnum != null) {
+			this.formOfPayment = formOfPaymentEnum.getCode();
+		}
+	}
+
 }

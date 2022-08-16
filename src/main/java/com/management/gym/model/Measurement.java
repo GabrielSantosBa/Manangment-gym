@@ -2,12 +2,14 @@ package com.management.gym.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,14 +31,21 @@ public class Measurement implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@EqualsAndHashCode.Include
 	@Column(name = "id_measurement")
-	private Integer id;
+	private Long id;
 	
+	@Size(max = 4)
 	private double height;
+	@Size(max = 4)
 	private double weight;
-	private double biceps;	
+	@Size(max = 4)
+	private double biceps;
+	@Size(max = 4)
 	private double triceps;
+	@Size(max = 5)
 	private double breastplate;
+	@Size(max = 4)
 	private double shoulder;
+	@Size(max = 4)
 	private double waist;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")

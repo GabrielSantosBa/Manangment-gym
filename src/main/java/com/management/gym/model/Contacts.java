@@ -1,12 +1,15 @@
 package com.management.gym.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,12 +29,16 @@ public class Contacts implements Serializable{
 	@EqualsAndHashCode.Include	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name = "id_contact")
-	private Integer id;
+	private Long id;
 	
-	private String instagram;	
+	@Size(min = 3, max = 100)
+	private String instagram;
+	
+	@Size(max = 12)	
 	private String numberPhone;	
-	private String email;
 	
+	@Email
+	private String email;
 	
 	
 }

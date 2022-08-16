@@ -17,7 +17,7 @@ public class MonthlyPaymentDTO {
 
 	private Integer financialStatusEnum;	
 	
-	private FormOfPaymentEnum formOfPayment;
+	private Integer formOfPayment;
 	
 	private BigDecimal monthlyfee;
 	

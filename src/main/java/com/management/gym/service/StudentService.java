@@ -24,11 +24,8 @@ import lombok.RequiredArgsConstructor;
 public class StudentService  {
 	
 	private final StudentRepository studentRepository;
-	private final MeasurementRepository measurementRepository;
-	
-	private final ContactStudentRepository contactStudentRepository;
-	
-	
+	private final MeasurementRepository measurementRepository;	
+	private final ContactStudentRepository contactStudentRepository;	
 	private final ModelMapper modelMapper;
 	
 	
@@ -53,16 +50,18 @@ public class StudentService  {
 	}
 
 	//Retorna as medidas de um aluno informando seu ID é o periodo a ser consultado.
-	public StudentMeasurementDTO listMeasurementByPeriod( String iniPeriod, String iniPeriodiniPeriod, Long id ) {
+	public StudentMeasurementDTO listMeasurementByPeriod( String iniDate, String finalDate, Long id ) {
 		
-		LocalDate initialPeriod = LocalDate.parse( iniPeriod );
-		LocalDate finalPeriod = LocalDate.parse( iniPeriod );
+		LocalDate initialPeriod = LocalDate.parse( iniDate );
+		LocalDate finalPeriod = LocalDate.parse( finalDate );
 		
-		if(!studentRepository.existsById(id)) {
+		 var studentMeasurment = studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, id);
+		
+		if(studentMeasurment.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!");
 		}
 		
-		return modelMapper.map(studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, id), StudentMeasurementDTO.class);
+		return modelMapper.map(studentMeasurment.get(), StudentMeasurementDTO.class);
 	}
 
 	//Salva um aluno completo
