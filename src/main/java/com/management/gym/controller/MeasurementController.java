@@ -1,5 +1,7 @@
 package com.management.gym.controller;
 
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class MeasurementController {
 	
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Student> findStudentMeasurementByPeriod(@PathVariable("id") Long id, @RequestBody @Valid Measurement measurement ){
+	public ResponseEntity<Student> findStudentMeasurementByPeriod(@PathVariable("id") UUID id, @RequestBody @Valid Measurement measurement ){
 		
 		return ResponseEntity.ok().body(measurementService.updateMeasumenteStudent(id, measurement));
 	}

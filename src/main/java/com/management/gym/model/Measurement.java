@@ -7,9 +7,9 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -28,24 +28,25 @@ public class Measurement implements Serializable {
 	
 	private static final long serialVersionUID = 5263382898051365368L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Id 
+	@GeneratedValue
 	@EqualsAndHashCode.Include
 	@Column(name = "id_measurement")
-	private Long id;
+	private UUID id;
 	
-	@Size(max = 4)
+	@Range(min = 0, max = 4)
 	private double height;
-	@Size(max = 4)
+	@Range(min = 0, max = 200)
 	private double weight;
-	@Size(max = 4)
+	@Range(min = 0, max = 300)
 	private double biceps;
-	@Size(max = 4)
+	@Range(min = 0, max = 200)
 	private double triceps;
-	@Size(max = 5)
+	@Range(min = 0, max = 200)
 	private double breastplate;
-	@Size(max = 4)
+	@Range(min = 0, max = 250)
 	private double shoulder;
-	@Size(max = 4)
+	@Range(min = 0, max = 100)
 	private double waist;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")

@@ -1,5 +1,7 @@
 package com.management.gym.controller;
 
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -43,14 +45,14 @@ public class StudentController {
 	
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<StudentDTO> listStudentsById(@PathVariable("id") Long id){
+	public ResponseEntity<StudentDTO> listStudentsById(@PathVariable("id") UUID id){
 		return ResponseEntity.ok().body(studentService.listById(id));
 	}
 	
 	
 	@GetMapping("/measurements/{id}")
 	public ResponseEntity<StudentMeasurementDTO> findStudentMeasurementByPeriod(
-			@PathVariable("id") Long id, 
+			@PathVariable("id") UUID id, 
 			@RequestParam(value = "minPeriod") String minPeriod,
 			@RequestParam(value = "maxPeriod") String maxPeriod){
 		

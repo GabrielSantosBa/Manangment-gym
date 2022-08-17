@@ -6,7 +6,6 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -27,9 +26,10 @@ public class Contacts implements Serializable{
 	private static final long serialVersionUID = 2353109548034904254L;
 
 	@EqualsAndHashCode.Include	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Id 
+	@GeneratedValue
 	@Column(name = "id_contact")
-	private Long id;
+	private UUID id;
 	
 	@Size(min = 3, max = 100)
 	private String instagram;

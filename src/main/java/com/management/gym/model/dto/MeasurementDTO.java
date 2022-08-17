@@ -1,11 +1,13 @@
 package com.management.gym.model.dto;
 
+import java.util.UUID;
+
 import lombok.Data;
 
 @Data
 public class MeasurementDTO {
 
-	private Long id;
+	private UUID id;
 	private double height;
 	private double weight;
 	private double biceps;	

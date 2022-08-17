@@ -1,5 +1,7 @@
 package com.management.gym.service;
 
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class MonthlyPaymentService  {
 	
 
 	//Retorna todos alunos ativos é inativos
-	public Page<MonthlyPaymentDTO> findStudentsWithStatusPayment(Long id, Integer status, Pageable pageable) {
+	public Page<MonthlyPaymentDTO> findStudentsWithStatusPayment(UUID id, Integer status, Pageable pageable) {
 		
 		return monthlyPaymentRepository.findAllByStatusById_student(id, status, pageable);
 	}

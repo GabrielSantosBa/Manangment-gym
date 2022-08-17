@@ -1,5 +1,7 @@
 package com.management.gym.controller;
 
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ public class MonthlyPaymentController {
 	
 	@GetMapping("/delayed-payments/{id}/{status}")
 	public Page<MonthlyPaymentDTO> listsAllStudentsWithStatusPayment(
-			@PathVariable("id") Long id, 
+			@PathVariable("id") UUID id, 
 			@PathVariable("status") Integer status, Pageable pageable){
 		return monthlyPaymentService.findStudentsWithStatusPayment(id, status, pageable);
 	}

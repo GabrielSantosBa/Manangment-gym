@@ -1,5 +1,7 @@
 package com.management.gym.service;
 
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,7 +21,7 @@ public class MeasurementService {
 	private final MeasurementRepository measurementRepository;
 
 	// Atualizar Measumentes de um student já cadastrado
-	public Student updateMeasumenteStudent(Long id, Measurement measurement) {
+	public Student updateMeasumenteStudent(UUID id, Measurement measurement) {
 
 		if (!studentRepository.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student não encontrado!");

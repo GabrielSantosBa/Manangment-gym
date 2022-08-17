@@ -1,6 +1,7 @@
 package com.management.gym.service;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -40,7 +41,7 @@ public class StudentService  {
 	}
 	
 	//Retorna um Student buscado pelo ID
-	public StudentDTO listById( Long id ) {
+	public StudentDTO listById( UUID id ) {
 		
 		if(!studentRepository.existsById( id )) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!");
@@ -50,7 +51,7 @@ public class StudentService  {
 	}
 
 	//Retorna as medidas de um aluno informando seu ID é o periodo a ser consultado.
-	public StudentMeasurementDTO listMeasurementByPeriod( String iniDate, String finalDate, Long id ) {
+	public StudentMeasurementDTO listMeasurementByPeriod( String iniDate, String finalDate, UUID id ) {
 		
 		LocalDate initialPeriod = LocalDate.parse( iniDate );
 		LocalDate finalPeriod = LocalDate.parse( finalDate );
