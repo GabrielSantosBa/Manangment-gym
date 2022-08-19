@@ -20,22 +20,26 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.management.gym.enums.SexoEnum;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-
+@Data
+@Entity(name = "tb_students") 
 @AllArgsConstructor 
 @NoArgsConstructor
-@Setter
-@Getter
-@Entity(name = "tb_students") 
+@Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Student implements Serializable{
 
 	
 	private static final long serialVersionUID = 4489958219071898520L;
-
+	
+	@EqualsAndHashCode.Include	
 	@Id 
 	@GeneratedValue
 	@Column(name = "id_student")

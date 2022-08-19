@@ -6,9 +6,11 @@ import java.util.UUID;
 
 import com.management.gym.model.Contacts;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class StudentDTO {
 	
 	private UUID id;

@@ -14,19 +14,23 @@ import org.hibernate.validator.constraints.Range;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@Entity(name = "tb_measurements")
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tb_measurements")
+@Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Measurement implements Serializable {
 
 	
 	
 	private static final long serialVersionUID = 5263382898051365368L;
+
 
 	@Id 
 	@GeneratedValue

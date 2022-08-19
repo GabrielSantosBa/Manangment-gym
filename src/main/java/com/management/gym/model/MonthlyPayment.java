@@ -20,14 +20,16 @@ import com.management.gym.enums.FinancialStatusEnum;
 import com.management.gym.enums.FormOfPaymentEnum;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@Entity(name = "tb_monthly_payment")
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tb_monthly_payment")
+@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class MonthlyPayment implements Serializable {
 

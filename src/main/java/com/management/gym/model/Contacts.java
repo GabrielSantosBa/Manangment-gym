@@ -11,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity(name = "tb_contact") 
 @AllArgsConstructor 
 @NoArgsConstructor
+@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Contacts implements Serializable{
 
