@@ -58,9 +58,9 @@ public class StudentService  {
 		
 		 var studentMeasurment = studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, id);
 		
-		if(studentMeasurment.isEmpty()) {
+		if(studentMeasurment.isEmpty()) 
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!");
-		}
+		
 		
 		return modelMapper.map(studentMeasurment.get(), StudentMeasurementDTO.class);
 	}

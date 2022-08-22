@@ -2,9 +2,11 @@ package com.management.gym.model.dto;
 
 import java.util.UUID;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class MeasurementDTO {
 
 	private UUID id;
