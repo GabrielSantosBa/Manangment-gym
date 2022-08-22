@@ -5,16 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.modelmapper.ModelMapper;
-
 import com.management.gym.model.Contacts;
 import com.management.gym.model.Measurement;
 import com.management.gym.model.Student;
 import com.management.gym.model.dto.MeasurementDTO;
 import com.management.gym.model.dto.StudentDTO;
 import com.management.gym.model.dto.StudentMeasurementDTO;
-
-import lombok.RequiredArgsConstructor;
 
 
 public class StudentBuilder {
@@ -56,7 +52,7 @@ public class StudentBuilder {
 		return contatos;
 	}
 	
-	protected static List<Measurement> createMeasurement() {
+	public static List<Measurement> createMeasurement() {
 		List<Measurement> measurement = new ArrayList<>();
 		measurement.add(Measurement.builder()
 				.id(UUID.randomUUID())

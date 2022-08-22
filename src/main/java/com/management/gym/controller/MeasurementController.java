@@ -30,8 +30,9 @@ public class MeasurementController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Student> findStudentMeasurementByPeriod(@PathVariable("id") UUID id, @RequestBody @Valid Measurement measurement ){
-		
-		return ResponseEntity.ok().body(measurementService.updateMeasumenteStudent(id, measurement));
+		//COrrigir nome do metodo(updateMeasumenteStudent)
+		measurementService.updateMeasumenteStudent(id, measurement);
+		return ResponseEntity.noContent().build();
 	}
 	
 	

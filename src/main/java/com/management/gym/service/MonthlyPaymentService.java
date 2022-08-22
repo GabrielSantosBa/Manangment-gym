@@ -21,7 +21,6 @@ public class MonthlyPaymentService  {
 
 	//Retorna todos alunos ativos é inativos
 	public Page<MonthlyPaymentDTO> findStudentsWithStatusPayment(UUID id, Integer status, Pageable pageable) {
-		
 		return monthlyPaymentRepository.findAllByStatusById_student(id, status, pageable);
 	}
 
