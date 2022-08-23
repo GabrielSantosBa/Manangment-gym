@@ -42,11 +42,9 @@ public class StudentService  {
 	
 	//Retorna um Student buscado pelo ID
 	public StudentDTO listById( UUID id ) {
-		
 		if(!studentRepository.existsById( id )) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!");
 		}
-		
 		return modelMapper.map(studentRepository.findById( id ).get(), StudentDTO.class);   
 	}
 
@@ -60,7 +58,6 @@ public class StudentService  {
 		
 		if(studentMeasurment.isEmpty()) 
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!");
-		
 		
 		return modelMapper.map(studentMeasurment.get(), StudentMeasurementDTO.class);
 	}
