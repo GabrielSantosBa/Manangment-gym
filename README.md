@@ -17,7 +17,7 @@ O **Gerenciador de Academia** e um projeto bem legal pessoal criado para ajudar 
 O projeto foi desenvolvido utilizando as seguintes tecnologias
 
 * [Spring - Framework Java](https://docs.spring.io/spring-framework/docs/current/reference/html/)
-* [Reac - uma biblioteca JavaScript
+* [React - uma biblioteca JavaScript](https://reactjs.org/docs/getting-started.html)
 * [Bootstrap - Framework CSS](https://getbootstrap.com/)
 * [PostgreSQL - Banco De Dados Relacional](https://www.postgresql.org/)
 * [JDK Oracle - Kit de Desenvolvimento Java- Vers 11](https://www.oracle.com/br/java/technologies/javase-downloads.html)
