@@ -22,7 +22,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
 * [PostgreSQL - Banco De Dados Relacional](https://www.postgresql.org/)
 * [JDK Oracle - Kit de Desenvolvimento Java- Vers 11](https://www.oracle.com/br/java/technologies/javase-downloads.html)
 * [Lombook - uma biblioteca java que se conecta automaticamente ao seu editor](https://projectlombok.org/)
-* [Maven - Apache Maven é uma ferramenta de gerenciamento e compreensão de projetos de software.](https://projectlombok.org/](https://maven.apache.org/)
+* [Maven - Apache Maven é uma ferramenta de gerenciamento e compreensão de projetos de software.](https://maven.apache.org/)
 
 ---
 
