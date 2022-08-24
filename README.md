@@ -34,7 +34,8 @@ Lombook
 
 
 
-<!--### 🔧 Instalação-->
+<!--### 🔧 Licença-->
 
+Esse projeto está sobre a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
 Desenvolvido com 💜 por Gabriel Santos
