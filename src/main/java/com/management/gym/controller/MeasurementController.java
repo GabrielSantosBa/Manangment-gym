@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.management.gym.model.Measurement;
-import com.management.gym.model.Student;
 import com.management.gym.service.MeasurementService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,13 +22,13 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class MeasurementController {
 
-	
+	//TODO Eliminar esse controller
 	
 	private final MeasurementService measurementService;
 	
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Student> findStudentMeasurementByPeriod(@PathVariable("id") UUID id, @RequestBody @Valid Measurement measurement ){
+	public ResponseEntity<Void> findStudentMeasurementByPeriod(@PathVariable("id") UUID id, @RequestBody @Valid Measurement measurement ){
 		//COrrigir nome do metodo(updateMeasumenteStudent)
 		measurementService.updateMeasumenteStudent(id, measurement);
 		return ResponseEntity.noContent().build();

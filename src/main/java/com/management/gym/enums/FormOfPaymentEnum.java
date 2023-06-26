@@ -15,14 +15,12 @@ public enum FormOfPaymentEnum {
 	}
 
 	public static FormOfPaymentEnum valueOfFormPaymentEnum(int cod) {
-
 		for (FormOfPaymentEnum form : FormOfPaymentEnum.values()) {
 
 			if (form.ordinal() == cod) {
 				return form;
 			}
 		}
-
 		throw new IllegalArgumentException("Numero invalido");
 	}
 

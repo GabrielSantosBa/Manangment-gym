@@ -17,7 +17,6 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.management.gym.enums.FinancialStatusEnum;
-import com.management.gym.enums.FormOfPaymentEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,8 +42,7 @@ public class MonthlyPayment implements Serializable {
 
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate paymentDate = LocalDate.now();
-
+	private LocalDate paymentDate;
 	
 	private BigDecimal monthlyfee;
 
@@ -53,29 +51,20 @@ public class MonthlyPayment implements Serializable {
 	private Integer financialStatusEnum;
 
 	private Integer daysLatePayment;
+	
+	@DateTimeFormat(iso = ISO.DATE)
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate payDay;
 
 	@ManyToOne
 	@JoinColumn(name = "FK_STUDENT")
 	private Student student;
 
-	public FinancialStatusEnum getSexoEnum() {
-		return FinancialStatusEnum.valueOf(financialStatusEnum);
-	}
-
-	public void setSexoEnum(FinancialStatusEnum financialStatusEnum) {
+	@SuppressWarnings("unused")
+	public void setFinancialStatusEnum(FinancialStatusEnum financialStatusEnum) {
 		if (financialStatusEnum != null) {
 			this.financialStatusEnum = financialStatusEnum.getCode();
 		}
 	}
-
-	public FormOfPaymentEnum getFormOfPaymentEnum() {
-		return FormOfPaymentEnum.valueOfFormPaymentEnum(formOfPayment);
-	}
-
-	public void setFinancialStatusEnum(FormOfPaymentEnum formOfPaymentEnum) {
-		if (formOfPaymentEnum != null) {
-			this.formOfPayment = formOfPaymentEnum.getCode();
-		}
-	}
-
+	
 }

@@ -3,7 +3,7 @@ package com.management.gym.enums;
 public enum FinancialStatusEnum {
 
 	
-	IN_DAY(1), LATE(2), IN_NEGOCIATION(3);
+	IN_DAY(1), LATE(2), TO_WIN(3);
 
 	private int code;
 

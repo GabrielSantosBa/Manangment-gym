@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,31 +14,27 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
 @Data
-@Entity(name = "tb_contact") 
+@Entity(name = "tb_authentication") 
 @AllArgsConstructor 
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Contacts implements Serializable{
+public class Authentication implements Serializable{
 
 	
-	private static final long serialVersionUID = 2353109548034904254L;
-
+	private static final long serialVersionUID = 4489958219071898520L;
+	
 	@EqualsAndHashCode.Include	
 	@Id 
 	@GeneratedValue
-	@Column(name = "id_contact")
-	private UUID id;
+	@Column(name = "id_authentication")
+	private UUID id;	
 	
-	@Size(min = 3, max = 100)
-	private String socialNetwork;
+	private String password;	
 	
-	@Size(max = 12)	
-	private String numberPhone;	
+	private String userLogged;
 	
-	@Email
 	private String email;
-	
-	
 }

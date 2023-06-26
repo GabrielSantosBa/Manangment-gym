@@ -8,10 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.management.gym.model.MonthlyPayment;
 import com.management.gym.model.Student;
 import com.management.gym.model.dto.MonthlyPaymentDTO;
 
-public interface MonthlyPaymentRepository extends JpaRepository<Student, UUID>{
+public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment, UUID>{
 
 	
 	//TODO fazer testes de performance com o FETCH JOIN

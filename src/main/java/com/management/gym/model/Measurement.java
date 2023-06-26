@@ -27,8 +27,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Measurement implements Serializable {
 
-	
-	
 	private static final long serialVersionUID = 5263382898051365368L;
 
 

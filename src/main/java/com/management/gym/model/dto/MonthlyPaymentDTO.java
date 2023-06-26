@@ -3,8 +3,6 @@ package com.management.gym.model.dto;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import com.management.gym.enums.FormOfPaymentEnum;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +21,7 @@ public class MonthlyPaymentDTO {
 	
 	private BigDecimal monthlyfee;
 	
+	//TODO Retirar esse atributo
 	private LocalDate birthDate;
 	
 	private String name;

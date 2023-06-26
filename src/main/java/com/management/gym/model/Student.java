@@ -3,6 +3,7 @@ package com.management.gym.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.management.gym.enums.FinancialStatusEnum;
 import com.management.gym.enums.SexoEnum;
 
 import lombok.AllArgsConstructor;
@@ -61,15 +63,18 @@ public class Student implements Serializable{
 	private LocalDate birthDate;
 	
 	@Column(name = "situation_training", columnDefinition = "boolean default true")
-	private boolean status = true;
+	private boolean status;//TODO validar forma de inicialização
 	
+	private Integer paymentStatus;
 	
-	public SexoEnum getFinancialStatusEnum() {
-		return SexoEnum.valueOfEnumSex(sexoEnum);
+	public void setValuePaymentStatus(FinancialStatusEnum statusEnum) {
+		if(Objects.nonNull(statusEnum)) {
+			this.paymentStatus = statusEnum.getCode();
+		}
 	}
 	
-	public void setFinancialStatusEnum(SexoEnum sexoEnum) {
-		if(sexoEnum != null) {
+	public void setSexoEnum(SexoEnum sexoEnum) {
+		if(Objects.nonNull(sexoEnum)) {
 			this.sexoEnum = sexoEnum.getCode();
 		}
 	}
