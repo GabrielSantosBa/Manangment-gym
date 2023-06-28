@@ -13,8 +13,10 @@ import com.management.gym.model.Student;
 
 public interface StudentRepository extends JpaRepository<Student, UUID>{
 
-	@Query(value = "SELECT * FROM tb_students student WHERE student.situation_training = ?1", nativeQuery = true)
-	public Page<Student> findStudentStatus(boolean status, Pageable pageable);
+//	@Query(value = "SELECT * FROM tb_students student WHERE student.situation_training = ?1", nativeQuery = true)
+//	public Page<Student> findStudentStatus(boolean status, Pageable pageable);
+	
+	public Page<Student> findStudentByStatus(boolean status, Pageable pageable);
 	
 	
 	@Query(value = "SELECT * FROM tb_students student "

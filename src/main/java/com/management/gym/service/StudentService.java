@@ -1,9 +1,13 @@
 package com.management.gym.service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -24,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StudentService  {
 	
+	private static final String STUDENT_NOT_FOUND = "Student not found!";
 	private final StudentRepository studentRepository;
 	private final MeasurementRepository measurementRepository;	
 	private final ContactStudentRepository contactStudentRepository;	
@@ -31,8 +36,8 @@ public class StudentService  {
 	
 	
 	//Retorna todos alunos por verificação de status
-	public Page<Student> listStudents( boolean status, Pageable pageable ){
-		return studentRepository.findStudentStatus( status, pageable );
+	public Page<Student> listStudentsBy( boolean status, Pageable pageable ){
+		return studentRepository.findStudentByStatus( status, pageable );
 	}
 
 	//Retorna todos alunos ativos é inativos
@@ -42,10 +47,9 @@ public class StudentService  {
 	
 	//Retorna um Student buscado pelo ID
 	public StudentDTO listById( UUID id ) {
-		if(!studentRepository.existsById( id )) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!");
-		}
-		return modelMapper.map(studentRepository.findById( id ).get(), StudentDTO.class);   
+		Optional<Student> student = studentRepository.findById( id );
+		if(!student.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
+		return modelMapper.map(student.get(), StudentDTO.class);   
 	}
 
 	//Retorna as medidas de um aluno informando seu ID é o periodo a ser consultado.
@@ -56,18 +60,29 @@ public class StudentService  {
 		
 		 var studentMeasurment = studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, id);
 		
-		if(studentMeasurment.isEmpty()) 
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found!");
-		
+		if(studentMeasurment.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
 		return modelMapper.map(studentMeasurment.get(), StudentMeasurementDTO.class);
 	}
 
 	//Salva um aluno completo
 	public Student createStudent(Student student) {
-		
 		student.setContacts(contactStudentRepository.saveAll(student.getContacts()));
 		student.setMeasurements(measurementRepository.saveAll(student.getMeasurements()));
-		
 		return studentRepository.save(student);
+	}
+
+	public void updateStudent(@Valid StudentDTO student) {
+		
+		Optional<Student> studentFound = studentRepository.findById(student.getId());
+		if(!studentFound.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
+		try {
+			BeanUtils.copyProperties(student, studentFound.get());
+			BeanUtils.copyProperties(student.getContacts(), studentFound.get().getContacts());
+			studentRepository.save(studentFound.get());
+			contactStudentRepository.saveAll(student.getContacts());
+		} catch (RuntimeException err) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, STUDENT_NOT_FOUND, err);
+		}
+		
 	}
 }

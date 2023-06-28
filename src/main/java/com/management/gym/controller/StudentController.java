@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-@RequestMapping("/students")
+@RequestMapping("/student")
 @RestController
 public class StudentController {
 
@@ -38,21 +38,21 @@ public class StudentController {
 		return studentService.listAllStudents(pageable);
 	}
 	
-	@GetMapping("/status")
-	public Page<Student> listsStudentsActive(@RequestParam boolean status, Pageable pageable){
-		return studentService.listStudents(status,pageable);
+	@GetMapping("/situation")
+	public Page<Student> listsStudentsByStatus(@RequestParam("status") boolean status, Pageable pageable){
+		return studentService.listStudentsBy(status,pageable);
 	}
 	
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<StudentDTO> listStudentsById(@PathVariable("id") UUID id){
+	@GetMapping("/identity")
+	public ResponseEntity<StudentDTO> listStudentsById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(studentService.listById(id));
 	}
 	
 	
-	@GetMapping("/measurements/{id}")
+	@GetMapping("/measurements")
 	public ResponseEntity<StudentMeasurementDTO> findStudentMeasurementByPeriod(
-			@PathVariable("id") UUID id, 
+			@RequestParam(value = "id") UUID id, 
 			@RequestParam(value = "minPeriod") String minPeriod,
 			@RequestParam(value = "maxPeriod") String maxPeriod){
 		
@@ -64,5 +64,15 @@ public class StudentController {
 	public ResponseEntity<Student> createStudent(@RequestBody @Valid Student student){
 		return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(student));
 	}
+	
+	@PutMapping
+	public ResponseEntity<Void> updateStudent(@RequestBody @Valid StudentDTO student){
+		studentService.updateStudent(student);
+		
+		
+		
+		return ResponseEntity.noContent().build();
+	}
+	
 	
 }

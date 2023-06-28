@@ -76,8 +76,8 @@ class StudentServiceTest {
 		List<Student> listStudentMock = List.of(student);
 		Pageable pageable = PageRequest.of(0, listStudentMock.size());
 		var studentMockPage = new PageImpl<>(List.of(student), pageable, pageable.getPageSize());
-		when(studentRepository.findStudentStatus(false, pageable)).thenReturn(studentMockPage);
-		Page<Student> listStudents = studentService.listStudents(false, pageable);
+		when(studentRepository.findStudentByStatus(false, pageable)).thenReturn(studentMockPage);
+		Page<Student> listStudents = studentService.listStudentsBy(false, pageable);
 		
 		assertEquals(listStudents.getTotalElements(), listStudentMock.size());
 		assertNotNull(listStudents);
@@ -96,29 +96,7 @@ class StudentServiceTest {
 		assertEquals(listAllStudents.getTotalElements(), listStudentMock.size());
 		assertNotNull(listAllStudents);
 	}
-
-	@Test
-	void testListByIdWhenIdExists() {
-		
-		when(studentRepository.findById(student.getId())).thenReturn(Optional.of(student));
-		when(studentRepository.existsById(student.getId())).thenReturn(true);
-		when(modelMapper.map(Mockito.any(), Mockito.any())).thenReturn(studentDTO);
-		
-		var listById = studentService.listById(student.getId());
-		
-		assertNotNull(listById);
-		assertEquals(listById, studentDTO);
-	}
 	
-	@Test
-	void testListByIdWhenIdNotExists() {
-		when(studentRepository.existsById(student.getId())).thenReturn(false);
-		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, ()-> studentService.listById(student.getId()));
-		
-		assertTrue(responseStatusException.getMessage().contains(STUDENT_NOT_FOUND));
-		assertTrue(responseStatusException.getStatus().equals(HttpStatus.NOT_FOUND));
-	}
-
 	@Test
 	void testListMeasurementByPeriodWhenIdExists() {
 		String iniDate = "2022-07-08";

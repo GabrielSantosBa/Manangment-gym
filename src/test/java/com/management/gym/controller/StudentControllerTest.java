@@ -70,7 +70,7 @@ class StudentControllerTest {
 		var studentPageMock = new PageImpl<>(List.of(student), pageable, pageable.getPageSize());
 
 		when(studentService.listAllStudents(pageable)).thenReturn(studentPageMock);
-		mockMvc.perform(get("/students?page=1&size=20")
+		mockMvc.perform(get("/student?page=1&size=20")
 				.content(objMapper.writeValueAsBytes(studentPageMock))
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk());
@@ -82,9 +82,9 @@ class StudentControllerTest {
 		Pageable pageable = PageRequest.of(0, 20);		
 		var studentPageMock = new PageImpl<>(List.of(student), pageable, pageable.getPageSize());
 		
-		when(studentService.listStudents(true,pageable)).thenReturn(studentPageMock);
+		when(studentService.listStudentsBy(true,pageable)).thenReturn(studentPageMock);
 		
-		mockMvc.perform(get("/students/status?status=false")
+		mockMvc.perform(get("/student/situation?status=false")
 				.content(objMapper.writeValueAsString(studentPageMock))
 				.contentType(MediaType.APPLICATION_JSON))	
 		.andExpect(status().isOk());
@@ -95,7 +95,7 @@ class StudentControllerTest {
 	void testListStudentsById() throws JsonProcessingException, Exception {
 		
 		when(studentService.listById(UUID.randomUUID())).thenReturn(studentDTO);	
-		mockMvc.perform(get("/students/b269ae57-31e2-44ec-bbb2-3b240a697337")
+		mockMvc.perform(get("/student/identity?id=b269ae57-31e2-44ec-bbb2-3b240a697337")
 				.content(objMapper.writeValueAsString(studentDTO))
 				.contentType(MediaType.APPLICATION_JSON))	
 		.andExpect(status().isOk());
@@ -111,7 +111,7 @@ class StudentControllerTest {
 		when(studentService.listMeasurementByPeriod(DateIni, DateFim, student.getId())).thenReturn(studentMeasurementDTO);
 		var listMeasurementByPeriod = studentService.listMeasurementByPeriod(DateIni, DateFim, student.getId());
 		
-		mockMvc.perform(get("/students/measurements/b269ae57-31e2-44ec-bbb2-3b240a697337?minPeriod=2022-07-01&maxPeriod=2022-08-01")
+		mockMvc.perform(get("/student/measurements?id=b269ae57-31e2-44ec-bbb2-3b240a697337&minPeriod=2022-07-01&maxPeriod=2022-08-01")
 				.content(objMapper.writeValueAsString(listMeasurementByPeriod))
 				.contentType(MediaType.APPLICATION_JSON))	
 		.andExpect(status().isOk());
@@ -126,7 +126,7 @@ class StudentControllerTest {
 		when(studentService.createStudent(student)).thenReturn(new Student());
 		
 		var createStudent = studentService.createStudent(student);
-		mockMvc.perform(post("/students")
+		mockMvc.perform(post("/student")
 				.content(objMapper.writeValueAsString(studentDTO))
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isCreated());
