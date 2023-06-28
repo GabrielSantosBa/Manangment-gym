@@ -4,9 +4,10 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.management.gym.model.Contacts;
+import com.management.gym.model.Teacher;
 
-public interface ContactStudentRepository extends JpaRepository<Contacts, UUID>{
+public interface TeacherRepository extends JpaRepository<Teacher, UUID>{
 
+	
 	
 }

@@ -29,7 +29,7 @@ import com.management.gym.builders.StudentBuilder;
 import com.management.gym.model.Student;
 import com.management.gym.model.dto.StudentDTO;
 import com.management.gym.model.dto.StudentMeasurementDTO;
-import com.management.gym.repository.ContactStudentRepository;
+import com.management.gym.repository.ContactRepository;
 import com.management.gym.repository.MeasurementRepository;
 import com.management.gym.repository.StudentRepository;
 
@@ -44,7 +44,7 @@ class StudentServiceTest {
 	private StudentRepository studentRepository;
 	
 	@Mock
-	private ContactStudentRepository contactStudentRepository;
+	private ContactRepository contactStudentRepository;
 	
 	@Mock
 	private MeasurementRepository measurementRepository;

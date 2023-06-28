@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -32,9 +33,11 @@ public class Teacher implements Serializable{
 	@Id 
 	@GeneratedValue
 	@Column(name = "id_teacher")
-	private UUID id;	
+	private UUID id;
 	
+	private String name;
 	
 	@OneToMany
+	@JoinColumn(name = "FK_TEACHER")
 	private List<Contacts> contacts;	
 }

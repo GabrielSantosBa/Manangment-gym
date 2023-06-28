@@ -19,7 +19,7 @@ import com.management.gym.model.Student;
 import com.management.gym.model.dto.MeasurementDTO;
 import com.management.gym.model.dto.StudentDTO;
 import com.management.gym.model.dto.StudentMeasurementDTO;
-import com.management.gym.repository.ContactStudentRepository;
+import com.management.gym.repository.ContactRepository;
 import com.management.gym.repository.MeasurementRepository;
 import com.management.gym.repository.StudentRepository;
 
@@ -33,7 +33,7 @@ public class StudentService  {
 	private static final String STUDENT_NOT_FOUND = "Student not found!";
 	private final StudentRepository studentRepository;
 	private final MeasurementRepository measurementRepository;	
-	private final ContactStudentRepository contactStudentRepository;	
+	private final ContactRepository contactStudentRepository;	
 	private final ModelMapper modelMapper;
 	
 	
@@ -64,7 +64,7 @@ public class StudentService  {
 		return studentRepository.save(student);
 	}
 
-	public void updateStudent(@Valid StudentDTO student) {
+	public void updateStudent(StudentDTO student) {
 		
 		Optional<Student> studentFound = studentRepository.findById(student.getId());
 		if(!studentFound.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
