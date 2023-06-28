@@ -47,7 +47,7 @@ public class StudentBuilder {
 		contatos.add(Contacts.builder()
 				.id(UUID.randomUUID())
 				.email("chapeu-palha@onepeace.haki")
-				.socialNetwork("@chapeuDePalha-Oficial")
+				//.socialNetwork("@chapeuDePalha-Oficial")
 				.numberPhone("75988806416").build());
 		return contatos;
 	}

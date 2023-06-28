@@ -21,8 +21,11 @@ public interface StudentRepository extends JpaRepository<Student, UUID>{
 	
 	@Query(value = "SELECT * FROM tb_students student "
 			+ "	INNER JOIN tb_measurements measure ON student.id_student = measure.fk_student "
-			+ "	AND measure.period BETWEEN ?1 AND ?2"
+			+ "	AND measure.date_measurement BETWEEN ?1 AND ?2"
 			+ "	WHERE student.id_student = ?3", nativeQuery = true)
-	public Optional<Student> findMeasurementByPeriod(LocalDate iniPeriod, LocalDate lastPeriod, UUID id);
+	 Optional<Student> findMeasurementByDateMeasurement(LocalDate iniPeriod, LocalDate lastPeriod, UUID id);
+	
+	
+	//Optional<Student> findStudentByIdAndMeasurementsBetween (UUID id, LocalDate iniPeriod, LocalDate lastPeriod);
 	
 }

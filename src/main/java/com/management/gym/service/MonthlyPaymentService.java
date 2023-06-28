@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.management.gym.model.MonthlyPayment;
 import com.management.gym.model.dto.MonthlyPaymentDTO;
 import com.management.gym.repository.MonthlyPaymentRepository;
 
@@ -19,9 +20,15 @@ public class MonthlyPaymentService  {
 	private final MonthlyPaymentRepository monthlyPaymentRepository;
 	
 
-	//Retorna todos alunos ativos é inativos
+	
 	public Page<MonthlyPaymentDTO> findStudentsWithStatusPayment(UUID id, Integer status, Pageable pageable) {
-		return monthlyPaymentRepository.findAllByStatusById_student(id, status, pageable);
+		//return monthlyPaymentRepository.findStudentByFinancialStatus(id, status, pageable);
+		
+		Page<MonthlyPayment> retorno = monthlyPaymentRepository.findByFinancialStatusEnumAndStudent(status, id, pageable);
+		
+		System.out.println("OHOHOH : "+retorno.toString());
+		
+		return null;
 	}
 
 	public Page<MonthlyPaymentDTO> findAllStudentsMonthlyPaymentLate(Pageable pageable) {

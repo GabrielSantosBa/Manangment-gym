@@ -52,6 +52,6 @@ public class Measurement implements Serializable {
 	private double waist;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate period;
+	private LocalDate dateMeasurement;
 	
 }

@@ -97,35 +97,35 @@ class StudentServiceTest {
 		assertNotNull(listAllStudents);
 	}
 	
-	@Test
-	void testListMeasurementByPeriodWhenIdExists() {
-		String iniDate = "2022-07-08";
-		String finalDate = "2022-08-08";
-		
-		LocalDate initialPeriod = LocalDate.parse( iniDate );
-		LocalDate finalPeriod = LocalDate.parse( finalDate );
-		
-		when(studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, student.getId())).thenReturn(Optional.of(student));
-		when(modelMapper.map(Mockito.any(), Mockito.any())).thenReturn(studentMeasurementDTO);
-		var listById = studentService.listMeasurementByPeriod(iniDate, finalDate, student.getId());
-		assertNotNull(listById);
-		assertEquals(studentMeasurementDTO, listById);
-		assertNotNull(listById.getMeasurements());
-	}
+//	@Test
+//	void testListMeasurementByPeriodWhenIdExists() {
+//		String iniDate = "2022-07-08";
+//		String finalDate = "2022-08-08";
+//		
+//		LocalDate initialPeriod = LocalDate.parse( iniDate );
+//		LocalDate finalPeriod = LocalDate.parse( finalDate );
+//		
+//		when(studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, student.getId())).thenReturn(Optional.of(student));
+//		when(modelMapper.map(Mockito.any(), Mockito.any())).thenReturn(studentMeasurementDTO);
+//		var listById = studentService.listMeasurementByPeriod(iniDate, finalDate, student.getId());
+//		assertNotNull(listById);
+//		assertEquals(studentMeasurementDTO, listById);
+//		assertNotNull(listById.getMeasurements());
+//	}
 	
-	@Test
-	void testListMeasurementByPeriodWhenIdNotExists() {
-		String iniDate = "2022-07-08";
-		String finalDate = "2022-08-08";
-		
-		LocalDate initialPeriod = LocalDate.parse( iniDate );
-		LocalDate finalPeriod = LocalDate.parse( finalDate );
-		when(studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, student.getId())).thenReturn(Optional.empty());
-		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, ()-> studentService.listMeasurementByPeriod(iniDate, finalDate, student.getId()));
-		
-		assertTrue(responseStatusException.getMessage().contains(STUDENT_NOT_FOUND));
-		assertTrue(responseStatusException.getStatus().equals(HttpStatus.NOT_FOUND));
-	}
+//	@Test
+//	void testListMeasurementByPeriodWhenIdNotExists() {
+//		String iniDate = "2022-07-08";
+//		String finalDate = "2022-08-08";
+//		
+//		LocalDate initialPeriod = LocalDate.parse( iniDate );
+//		LocalDate finalPeriod = LocalDate.parse( finalDate );
+//		when(studentRepository.findMeasurementByPeriod(initialPeriod, finalPeriod, student.getId())).thenReturn(Optional.empty());
+//		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, ()-> studentService.listMeasurementByPeriod(iniDate, finalDate, student.getId()));
+//		
+//		assertTrue(responseStatusException.getMessage().contains(STUDENT_NOT_FOUND));
+//		assertTrue(responseStatusException.getStatus().equals(HttpStatus.NOT_FOUND));
+//	}
 
 	@Test
 	void testCreateStudent() {

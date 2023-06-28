@@ -19,12 +19,15 @@ public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment, 
 	@Query("SELECT new com.management.gym.model.dto.MonthlyPaymentDTO(payment.financialStatusEnum, payment.formOfPayment, payment.monthlyfee, student.birthDate, student.name )"
 			+ " FROM tb_monthly_payment payment JOIN payment.student student "
 			+ " WHERE student.id = :id_student and payment.financialStatusEnum = :status")
-			public Page<MonthlyPaymentDTO> findAllByStatusById_student(@Param("id_student") UUID id_student, @Param("status") Integer status, Pageable pageable);
+			Page<MonthlyPaymentDTO> findAllByStatusById_student(@Param("id_student") UUID id_student, @Param("status") Integer status, Pageable pageable);
 
+	
+	Page<MonthlyPayment> findByFinancialStatusEnumAndStudent(Integer status, UUID id_student, Pageable pageable);
+	
 	
 	@Query("SELECT new com.management.gym.model.dto.MonthlyPaymentDTO(payment.financialStatusEnum, payment.formOfPayment, payment.monthlyfee, student.birthDate, student.name)"
 			+ " FROM tb_monthly_payment payment JOIN payment.student student "
 			+ " WHERE payment.financialStatusEnum = 2")
-	public Page<MonthlyPaymentDTO> findAllAccountsLatePayment(Pageable pageable);
+	Page<MonthlyPaymentDTO> findAllAccountsLatePayment(Pageable pageable);
 	
 }
