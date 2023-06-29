@@ -21,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.management.gym.enums.FinancialStatusEnum;
 import com.management.gym.enums.SexoEnum;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -65,6 +66,7 @@ public class Student implements Serializable{
 	@Column(name = "situation_training", columnDefinition = "boolean default true")
 	private boolean status;//TODO validar forma de inicialização
 	
+	@Schema(description = "Value will be used via routine", required = false)
 	private Integer paymentStatus;
 	
 	public void setValuePaymentStatus(FinancialStatusEnum statusEnum) {

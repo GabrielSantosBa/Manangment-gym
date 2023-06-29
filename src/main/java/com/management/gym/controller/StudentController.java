@@ -8,8 +8,6 @@ import javax.validation.Valid;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +53,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "500", description = "Erro Return Student")
 	})
 	@GetMapping("/situation")
-	@Operation(summary = "List an student by situation training(active or inative) in the gym.", tags = {"Student"})
+	@Operation(summary = "List a student by situation training(active or inative) in the gym.", tags = {"Student"})
 	public Page<Student> listsStudentsByStatus(@RequestParam("status") boolean status, Pageable pageable){
 		return studentService.listStudentsBy(status,pageable);
 	}
@@ -66,6 +64,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@GetMapping("/identifier")
+	@Operation(summary = "List a student by (ID).", tags = {"Student"})
 	public ResponseEntity<StudentDTO> listStudentsById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(studentService.listById(id));
 	}
@@ -76,6 +75,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@GetMapping("/measurements")
+	@Operation(summary = "List measurements a student's by time interval.", tags = {"Student"})
 	public ResponseEntity<StudentMeasurementDTO> findStudentMeasurementByPeriod(
 			@RequestParam(value = "id") UUID id, 
 			@RequestParam(value = "minPeriod") LocalDate minPeriod,
@@ -85,20 +85,22 @@ public class StudentController {
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Create an new Student With Sucess"),
+			@ApiResponse(responseCode = "201", description = "Create an new Student With Sucess"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PostMapping
+	@Operation(summary = "Create a student complete in database.", tags = {"Student"})
 	public ResponseEntity<Student> createStudent(@RequestBody @Valid Student student){
 		return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(student));
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Update an StudentofWith Success"),
+			@ApiResponse(responseCode = "204", description = "Update an StudentofWith Success"),
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PutMapping
+	@Operation(summary = "Update student data in the database.", tags = {"Student"})
 	public ResponseEntity<Void> updateStudent(@RequestBody @Valid StudentDTO student){
 		studentService.updateStudent(student);
 		return ResponseEntity.noContent().build();
@@ -110,6 +112,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PutMapping("/measurements")
+	@Operation(summary = "Update a student's measurements in the database.", tags = {"Student"})
 	public ResponseEntity<Void> addMeasurement(@RequestBody @Valid MeasurementDTO measurementDTO, @RequestParam("id") UUID id){
 		studentService.addUpdateMeasurement(measurementDTO,id);
 		return ResponseEntity.noContent().build();

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,7 @@ public class Teacher implements Serializable{
 	@Column(name = "id_teacher")
 	private UUID id;
 	
+	@NotBlank
 	private String name;
 	
 	@OneToMany

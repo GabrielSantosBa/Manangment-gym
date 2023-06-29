@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.management.gym.model.Teacher;
 import com.management.gym.service.TeacherService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,10 @@ public class TeacherController {
 	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Return All Teachers With Success"),
-			@ApiResponse(responseCode = "404", description = "Erro Return All Teachers")
+			@ApiResponse(responseCode = "400", description = "Erro Return All Teachers")
 	})
 	@GetMapping
+	@Operation(summary = "List all Teacher.", tags = {"Teacher"})
 	public List<Teacher> listsAllTeachers(){
 		return teacherService.findAllTeachers();
 	}
@@ -47,6 +49,7 @@ public class TeacherController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@GetMapping("/identifier")
+	@Operation(summary = "List a teacher by (ID).", tags = {"Teacher"})
 	public ResponseEntity<Teacher> listTeacherById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(teacherService.listById(id));
 	}
@@ -56,6 +59,7 @@ public class TeacherController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PostMapping
+	@Operation(summary = "Create a teacher in database).", tags = {"Teacher"})
 	public ResponseEntity<Teacher> createTeacher(@RequestBody @Valid Teacher teacher){
 		return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.createTeacher(teacher));
 	}
@@ -66,6 +70,7 @@ public class TeacherController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PutMapping
+	@Operation(summary = "Update data a teacher in database).", tags = {"Teacher"})
 	public ResponseEntity<Void> updateTeacher(@RequestBody Teacher teacher, @RequestParam("id") UUID id){
 		teacherService.updateTeacher(teacher, id);
 		return ResponseEntity.noContent().build();
@@ -77,6 +82,7 @@ public class TeacherController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@DeleteMapping
+	@Operation(summary = "Delete a teacher in database).", tags = {"Teacher"})
 	public ResponseEntity<String> deleteTeacher(@RequestParam("id") UUID id){
 		teacherService.deleteTeacher(id);
 		return ResponseEntity.status(HttpStatus.OK).body("Registry Deleted Successfully!");
