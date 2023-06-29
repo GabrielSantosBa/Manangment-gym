@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.management.gym.common.Utilities;
 import com.management.gym.model.Measurement;
 import com.management.gym.model.Student;
 import com.management.gym.model.dto.MeasurementDTO;
@@ -35,6 +36,7 @@ public class StudentService  {
 	private final MeasurementRepository measurementRepository;	
 	private final ContactRepository contactStudentRepository;	
 	private final ModelMapper modelMapper;
+	private final Utilities methodUtil;
 	
 	
 	public Page<Student> listStudentsBy( boolean status, Pageable pageable ){
@@ -83,14 +85,10 @@ public class StudentService  {
 		Optional<Student> student = studentRepository.findById(id);
 		if(!student.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
 		
-		Measurement measurementEntity = (Measurement) convertToEntity(measurementDTO, Measurement.class);
+		Measurement measurementEntity = (Measurement) methodUtil.convertTo(measurementDTO, Measurement.class);
 		
 		student.get().getMeasurements().add(measurementEntity);
 		measurementRepository.saveAll(student.get().getMeasurements());
 		
-	}
-	
-	private <T> Object convertToEntity(Object sourceObject, Class<T> classTarget) {
-		 return modelMapper.map(sourceObject, classTarget);
 	}
 }

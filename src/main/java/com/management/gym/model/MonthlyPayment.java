@@ -48,7 +48,7 @@ public class MonthlyPayment implements Serializable {
 
 	private Integer formOfPayment;
 
-	private Integer financialStatusEnum;
+	private Integer financialStatusCod;
 
 	private Integer daysLatePayment;
 	
@@ -60,10 +60,10 @@ public class MonthlyPayment implements Serializable {
 	@JoinColumn(name = "FK_STUDENT")
 	private Student student;
 
-	@SuppressWarnings("unused")
+	
 	public void setFinancialStatusEnum(FinancialStatusEnum financialStatusEnum) {
 		if (financialStatusEnum != null) {
-			this.financialStatusEnum = financialStatusEnum.getCode();
+			this.financialStatusCod = financialStatusEnum.getCode();
 		}
 	}
 	

@@ -61,7 +61,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
-	@GetMapping("/identity")
+	@GetMapping("/identifier")
 	public ResponseEntity<StudentDTO> listStudentsById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(studentService.listById(id));
 	}
@@ -105,7 +105,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
-	@PutMapping("/update/measurements")
+	@PutMapping("/measurements")
 	public ResponseEntity<Void> addMeasurement(@RequestBody @Valid MeasurementDTO measurementDTO, @RequestParam("id") UUID id){
 		studentService.addUpdateMeasurement(measurementDTO,id);
 		return ResponseEntity.noContent().build();
