@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -25,6 +26,7 @@ import com.management.gym.model.dto.StudentDTO;
 import com.management.gym.model.dto.StudentMeasurementDTO;
 import com.management.gym.service.StudentService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +45,8 @@ public class StudentController {
 			@ApiResponse(responseCode = "500", description = "Erro Return All Students")
 	})
 	@GetMapping
-	public Page<Student> listsAllStudents(@PageableDefault(sort = "name", direction = Direction.DESC, page = 0, size = 10) Pageable pageable){
+	@Operation(summary = "List all students in database", tags = {"Student"})
+	public Page<Student> listsAllStudents(@ParameterObject Pageable pageable){
 		return studentService.listAllStudents(pageable);
 	}
 	
@@ -52,6 +55,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "500", description = "Erro Return Student")
 	})
 	@GetMapping("/situation")
+	@Operation(summary = "List an student by situation training(active or inative) in the gym.", tags = {"Student"})
 	public Page<Student> listsStudentsByStatus(@RequestParam("status") boolean status, Pageable pageable){
 		return studentService.listStudentsBy(status,pageable);
 	}
