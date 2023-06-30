@@ -43,7 +43,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "500", description = "Erro Return All Students")
 	})
 	@GetMapping
-	@Operation(summary = "List all students in database", tags = {"Student"})
+	@Operation(summary = "Lists all students in database", tags = {"Student"})
 	public Page<Student> listsAllStudents(@ParameterObject Pageable pageable){
 		return studentService.listAllStudents(pageable);
 	}

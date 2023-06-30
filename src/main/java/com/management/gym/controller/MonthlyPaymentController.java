@@ -32,11 +32,11 @@ public class MonthlyPaymentController {
 	
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Return With Operation Success"),
+			@ApiResponse(responseCode = "200", description = "Operation Success"),
 			@ApiResponse(responseCode = "400", description = "Return Fail Operation"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
-	@Operation(summary = "Find Monthly Payment by financia status and student by (ID).", tags = {"Monthly-payment"})
+	@Operation(summary = "Finds all Monthly Payment os a student by financia status (in day, late, in negociation).", tags = {"Monthly-payment"})
 	@GetMapping
 	public Page<MonthlyPaymentDTO> findMonthlyPaymentByStudentAndFinancialStatus(
 			@RequestParam("financialStatus") Integer financialCod, Pageable pageable,
@@ -45,11 +45,11 @@ public class MonthlyPaymentController {
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Return With Operation Success"),
+			@ApiResponse(responseCode = "200", description = "Operation Success"),
 			@ApiResponse(responseCode = "400", description = "Return Fail Operation"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
-	@Operation(summary = "Create a Monthly Payment.", tags = {"Monthly-payment"})
+	@Operation(summary = "Creates a Monthly Payment.", tags = {"Monthly-payment"})
 	@PostMapping
 	public MonthlyPaymentDTO createMonthlyPayment(@RequestBody @Valid MonthlyPaymentDTO monthlyPaymentDTO){
 		return monthlyPaymentService.createMonthlyPaymentStudent(monthlyPaymentDTO);
