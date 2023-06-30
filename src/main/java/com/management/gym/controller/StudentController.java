@@ -63,7 +63,7 @@ public class StudentController {
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
-	@GetMapping("/identifier")
+	@GetMapping("/by-id")
 	@Operation(summary = "List a student by (ID).", tags = {"Student"})
 	public ResponseEntity<StudentDTO> listStudentsById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(studentService.listById(id));

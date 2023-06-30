@@ -34,7 +34,7 @@ public class MonthlyPaymentValidation {
 	private final DailyAccoutingRepository dailyAccoutingRepository;
 	
 	
-	@Scheduled(cron = "1 01 00 * * *", zone = "America/Sao_Paulo")
+	@Scheduled(cron = "1 27 18 * * *", zone = "America/Sao_Paulo")
 	private void validationExecute() {
 		
 		BigDecimal totalMonthlyDelayed = new BigDecimal(0);
@@ -47,7 +47,7 @@ public class MonthlyPaymentValidation {
 		
 		for (MonthlyPayment monthlyPayment : monthlyPaymentRepository.findAll()) {
 			   
-			Long daysLatePayment = monthlyPayment.getPayDay().until(LocalDate.now().plusDays(daysLatePermited), ChronoUnit.DAYS);
+			Long daysLatePayment = monthlyPayment.getPaymentDate().until(LocalDate.now().plusDays(daysLatePermited), ChronoUnit.DAYS);
 			
 			if(daysLatePayment > 35) {
 				monthlyPayment.setFinancialStatusEnum(FinancialStatusEnum.LATE);

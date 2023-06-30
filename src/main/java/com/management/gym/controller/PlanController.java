@@ -49,7 +49,7 @@ public class PlanController {
 			@ApiResponse(responseCode = "400", description = "Plan Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
-	@GetMapping("/identifier")
+	@GetMapping("/by-id")
 	@Operation(summary = "List a Plan by (ID).", tags = {"Plan"})
 	public ResponseEntity<Plan> listPlanById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(planService.listById(id));
