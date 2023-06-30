@@ -35,8 +35,6 @@ public class Plan implements Serializable{
 	@Column(name = "id_plan")
 	private UUID id;	
 	
-	private String icon;
-	
 	private String namePlan;	
 	
 	private BigDecimal valuePlan;

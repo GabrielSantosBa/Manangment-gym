@@ -39,7 +39,7 @@ public class StudentController {
 	
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Return All Students With Success"),
+			@ApiResponse(responseCode = "200", description = "Operation Success"),
 			@ApiResponse(responseCode = "500", description = "Erro Return All Students")
 	})
 	@GetMapping
@@ -49,17 +49,17 @@ public class StudentController {
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Return Student By Situation With Success"),
+			@ApiResponse(responseCode = "200", description = "Operation Success"),
 			@ApiResponse(responseCode = "500", description = "Erro Return Student")
 	})
 	@GetMapping("/situation")
-	@Operation(summary = "List a student by situation training(active or inative) in the gym.", tags = {"Student"})
+	@Operation(summary = "Lists a student by situation training(active or inative) in the gym.", tags = {"Student"})
 	public Page<Student> listsStudentsByStatus(@RequestParam("status") boolean status, Pageable pageable){
 		return studentService.listStudentsBy(status,pageable);
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Return Student By Id With Success"),
+			@ApiResponse(responseCode = "200", description = "Operation Success"),
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
@@ -70,12 +70,12 @@ public class StudentController {
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Return measurements of Student By between period"),
+			@ApiResponse(responseCode = "200", description = "Operation Success"),
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@GetMapping("/measurements")
-	@Operation(summary = "List measurements a student's by time interval.", tags = {"Student"})
+	@Operation(summary = "Returns measurements of a student for a given period", tags = {"Student"})
 	public ResponseEntity<StudentMeasurementDTO> findStudentMeasurementByPeriod(
 			@RequestParam(value = "id") UUID id, 
 			@RequestParam(value = "minPeriod") LocalDate minPeriod,
@@ -85,34 +85,34 @@ public class StudentController {
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "Create an new Student With Sucess"),
+			@ApiResponse(responseCode = "201", description = "Operation Success"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PostMapping
-	@Operation(summary = "Create a student complete in database.", tags = {"Student"})
+	@Operation(summary = "Creates a student in the database.", tags = {"Student"})
 	public ResponseEntity<Student> createStudent(@RequestBody @Valid Student student){
 		return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(student));
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "204", description = "Update an StudentofWith Success"),
+			@ApiResponse(responseCode = "204", description = "Operation Success"),
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PutMapping
-	@Operation(summary = "Update student data in the database.", tags = {"Student"})
+	@Operation(summary = "Updates student data in the database.", tags = {"Student"})
 	public ResponseEntity<Void> updateStudent(@RequestBody @Valid StudentDTO student){
 		studentService.updateStudent(student);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Update measurements an Student With Success"),
+			@ApiResponse(responseCode = "200", description = "Operation Success"),
 			@ApiResponse(responseCode = "400", description = "Student Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PutMapping("/measurements")
-	@Operation(summary = "Update a student's measurements in the database.", tags = {"Student"})
+	@Operation(summary = "Updates a student's measurements in the database.", tags = {"Student"})
 	public ResponseEntity<Void> addMeasurement(@RequestBody @Valid MeasurementDTO measurementDTO, @RequestParam("id") UUID id){
 		studentService.addUpdateMeasurement(measurementDTO,id);
 		return ResponseEntity.noContent().build();

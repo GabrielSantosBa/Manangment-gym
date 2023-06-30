@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.management.gym.model.dto.TeacherDTO;
-import com.management.gym.service.TeacherService;
+import com.management.gym.model.Plan;
+import com.management.gym.model.dto.PlanDTO;
+import com.management.gym.service.PlanService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,32 +27,32 @@ import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor
-@RequestMapping("/teacher")
+@RequestMapping("/plan")
 @RestController
-public class TeacherController {
+public class PlanController {
 	
-	private final TeacherService teacherService;
+	private final PlanService planService;
 	
 	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Operation Success"),
-			@ApiResponse(responseCode = "400", description = "Erro Return All Teachers")
+			@ApiResponse(responseCode = "400", description = "When Operation Error")
 	})
 	@GetMapping
-	@Operation(summary = "List all Teacher.", tags = {"Teacher"})
-	public List<TeacherDTO> listsAllTeachers(){
-		return teacherService.findAllTeachers();
+	@Operation(summary = "List all Plans.", tags = {"Plan"})
+	public List<Plan> listsAllPlans(){
+		return planService.findAllPlans();
 	}
 	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Operation Success"),
-			@ApiResponse(responseCode = "400", description = "Teacher Not Found!"),
+			@ApiResponse(responseCode = "400", description = "Plan Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@GetMapping("/identifier")
-	@Operation(summary = "List a teacher by (ID).", tags = {"Teacher"})
-	public ResponseEntity<TeacherDTO> listTeacherById(@RequestParam("id") UUID id){
-		return ResponseEntity.ok().body(teacherService.listById(id));
+	@Operation(summary = "List a Plan by (ID).", tags = {"Plan"})
+	public ResponseEntity<Plan> listPlanById(@RequestParam("id") UUID id){
+		return ResponseEntity.ok().body(planService.listById(id));
 	}
 	
 	@ApiResponses(value = {
@@ -59,32 +60,32 @@ public class TeacherController {
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PostMapping
-	@Operation(summary = "Create a teacher in database).", tags = {"Teacher"})
-	public ResponseEntity<TeacherDTO> createTeacher(@RequestBody @Valid TeacherDTO teacherDto){
-		return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.createTeacher(teacherDto));
+	@Operation(summary = "Create a Plan in database).", tags = {"Plan"})
+	public ResponseEntity<Plan> createPlan(@RequestBody @Valid Plan plan){
+		return ResponseEntity.status(HttpStatus.CREATED).body(planService.createplan(plan));
 	}
 	
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Operation Success"),
-			@ApiResponse(responseCode = "400", description = "Teacher Not Found!"),
+			@ApiResponse(responseCode = "204", description = "Operation Success"),
+			@ApiResponse(responseCode = "400", description = "Plan Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@PutMapping
-	@Operation(summary = "Update data a teacher in database).", tags = {"Teacher"})
-	public ResponseEntity<Void> updateTeacher(@RequestBody TeacherDTO teacherDto, @RequestParam("id") UUID id){
-		teacherService.updateTeacher(teacherDto, id);
+	@Operation(summary = "Update data a Plan in database).", tags = {"Plan"})
+	public ResponseEntity<Void> updatePlan(@RequestBody PlanDTO planDto, @RequestParam("id") UUID id){
+		planService.updateplan(planDto, id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Operation Success"),
-			@ApiResponse(responseCode = "400", description = "Teacher Not Found!"),
+			@ApiResponse(responseCode = "400", description = "Plan Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
 	@DeleteMapping
-	@Operation(summary = "Delete a teacher in database).", tags = {"Teacher"})
-	public ResponseEntity<String> deleteTeacher(@RequestParam("id") UUID id){
-		teacherService.deleteTeacher(id);
+	@Operation(summary = "Delete a Plan in database).", description = "Registry Deleted Successfully", tags = {"Plan"})
+	public ResponseEntity<String> deletePlan(@RequestParam("id") UUID id){
+		planService.deleteplan(id);
 		return ResponseEntity.status(HttpStatus.OK).body("Registry Deleted Successfully!");
 	}
 	
