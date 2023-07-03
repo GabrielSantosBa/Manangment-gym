@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.management.gym.model.Plan;
 import com.management.gym.model.dto.PlanDTO;
 import com.management.gym.service.PlanService;
 
@@ -40,7 +39,7 @@ public class PlanController {
 	})
 	@GetMapping
 	@Operation(summary = "List all Plans.", tags = {"Plan"})
-	public List<Plan> listsAllPlans(){
+	public List<PlanDTO> listsAllPlans(){
 		return planService.findAllPlans();
 	}
 	
@@ -51,7 +50,7 @@ public class PlanController {
 	})
 	@GetMapping("/by-id")
 	@Operation(summary = "List a Plan by (ID).", tags = {"Plan"})
-	public ResponseEntity<Plan> listPlanById(@RequestParam("id") UUID id){
+	public ResponseEntity<PlanDTO> listPlanById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(planService.listById(id));
 	}
 	
@@ -61,8 +60,8 @@ public class PlanController {
 	})
 	@PostMapping
 	@Operation(summary = "Create a Plan in database).", tags = {"Plan"})
-	public ResponseEntity<Plan> createPlan(@RequestBody @Valid Plan plan){
-		return ResponseEntity.status(HttpStatus.CREATED).body(planService.createplan(plan));
+	public ResponseEntity<PlanDTO> createPlan(@RequestBody @Valid PlanDTO planDto){
+		return ResponseEntity.status(HttpStatus.CREATED).body(planService.createplan(planDto));
 	}
 	
 	@ApiResponses(value = {
@@ -72,8 +71,8 @@ public class PlanController {
 	})
 	@PutMapping
 	@Operation(summary = "Update data a Plan in database).", tags = {"Plan"})
-	public ResponseEntity<Void> updatePlan(@RequestBody PlanDTO planDto, @RequestParam("id") UUID id){
-		planService.updateplan(planDto, id);
+	public ResponseEntity<Void> updatePlan(@RequestBody PlanDTO planDto){
+		planService.updateplan(planDto);
 		return ResponseEntity.noContent().build();
 	}
 	

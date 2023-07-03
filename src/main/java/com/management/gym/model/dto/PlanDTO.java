@@ -1,6 +1,9 @@
 package com.management.gym.model.dto;
 
 import java.math.BigDecimal;
+import java.util.UUID;
+
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +17,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class PlanDTO {
+	
+	@NotBlank
+	private UUID id;
 	
 	private String namePlan;
 	
