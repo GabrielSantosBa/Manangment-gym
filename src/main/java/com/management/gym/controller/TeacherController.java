@@ -71,8 +71,8 @@ public class TeacherController {
 	})
 	@PutMapping
 	@Operation(summary = "Update data a teacher in database).", tags = {"Teacher"})
-	public ResponseEntity<Void> updateTeacher(@RequestBody TeacherDTO teacherDto, @RequestParam("id") UUID id){
-		teacherService.updateTeacher(teacherDto, id);
+	public ResponseEntity<Void> updateTeacher(@RequestBody TeacherDTO teacherDto){
+		teacherService.updateTeacher(teacherDto);
 		return ResponseEntity.noContent().build();
 	}
 	

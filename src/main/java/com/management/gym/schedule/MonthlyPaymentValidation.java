@@ -23,18 +23,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MonthlyPaymentValidation {
 
-	//private final StudentRepository studentRepository;
 	private final MonthlyPaymentRepository monthlyPaymentRepository;
-	
-//	@Value("days.late.permited")
-//	private Integer daysLatePermited; //TODO validar o uso de configurationProperties :: https://pt.stackoverflow.com/questions/334187/pegar-valor-de-uma-propriedade-do-application-properties-spring-boot
-	
-	private int daysLatePermited = 5;
 	
 	private final DailyAccoutingRepository dailyAccoutingRepository;
 	
+	private int daysLatePermited = 5;
 	
-	@Scheduled(cron = "1 27 18 * * *", zone = "America/Sao_Paulo")
+	
+	
+	@Scheduled(cron = "1 01 00 * * *", zone = "America/Sao_Paulo")
 	private void validationExecute() {
 		
 		BigDecimal totalMonthlyDelayed = new BigDecimal(0);
@@ -45,32 +42,33 @@ public class MonthlyPaymentValidation {
 		List<DailyAccounting> listDailyAccounting = new ArrayList<>();
 		List<MonthlyPayment> listMonthlyPayment = new ArrayList<>();
 		
+		
 		for (MonthlyPayment monthlyPayment : monthlyPaymentRepository.findAll()) {
-			   
-			Long daysLatePayment = monthlyPayment.getPaymentDate().until(LocalDate.now().plusDays(daysLatePermited), ChronoUnit.DAYS);
-			
-			if(daysLatePayment > 35) {
+
+			Long daysLatePayment = monthlyPayment.getPaymentDate().until(LocalDate.now().plusDays(daysLatePermited),
+					ChronoUnit.DAYS);
+
+			if (daysLatePayment > 35) {
 				monthlyPayment.setFinancialStatusEnum(FinancialStatusEnum.LATE);
 				monthlyPayment.getStudent().setValuePaymentStatus(FinancialStatusEnum.LATE);
 				monthlyPayment.setDaysLatePayment(daysLatePayment.intValue());
-				totalMonthlyDelayed =  monthlyPayment.getMonthlyfee().add(totalMonthlyDelayed);
-			} else if(daysLatePayment == 35) {
-				totalMonthlyOnDay = monthlyPayment.getMonthlyfee().add(totalMonthlyOnDay);
+				totalMonthlyDelayed = monthlyPayment.getMonthlyfee().add(totalMonthlyDelayed);
+			} else if (daysLatePayment == 35) {
 				monthlyPayment.setFinancialStatusEnum(FinancialStatusEnum.IN_DAY);
 				monthlyPayment.getStudent().setValuePaymentStatus(FinancialStatusEnum.IN_DAY);
+				totalMonthlyOnDay = monthlyPayment.getMonthlyfee().add(totalMonthlyOnDay);
 			} else {
-				totalMonthlyDue = monthlyPayment.getMonthlyfee().add(totalMonthlyDue);
 				monthlyPayment.setFinancialStatusEnum(FinancialStatusEnum.TO_WIN);
 				monthlyPayment.getStudent().setValuePaymentStatus(FinancialStatusEnum.TO_WIN);
+				totalMonthlyDue = monthlyPayment.getMonthlyfee().add(totalMonthlyDue);
 			}
 			listMonthlyPayment.add(monthlyPayment);
 			listDailyAccounting.add(buildDailyAccounting(totalMonthlyDelayed, totalMonthlyOnDay, totalMonthlyDue));
 		}
-		
-		dailyAccoutingRepository.saveAll(listDailyAccounting);//TODO erro aqui, validar o generatedValue
+
+		dailyAccoutingRepository.saveAll(listDailyAccounting);
 		monthlyPaymentRepository.saveAll(listMonthlyPayment);
 	}
-
 
 	private DailyAccounting buildDailyAccounting(BigDecimal totalMonthlyDelayed, BigDecimal totalMonthlyOnDay,
 			BigDecimal totalMonthlyDue) {
