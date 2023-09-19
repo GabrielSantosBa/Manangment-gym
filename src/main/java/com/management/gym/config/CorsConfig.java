@@ -14,14 +14,14 @@ public class CorsConfig{
             @Override
             public void addCorsMappings(final CorsRegistry registry) {
                 registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT","DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
             }
         };
     }
-	
+	 
 //	@Bean
 //    CorsConfigurationSource corsConfigurationSource() {
 //        CorsConfiguration configuration = new CorsConfiguration();
