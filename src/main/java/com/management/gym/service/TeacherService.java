@@ -60,8 +60,8 @@ public class TeacherService {
 		return (TeacherDTO) methodUtil.convertTo(teacherRepository.save(teacherEntity), TeacherDTO.class);
 	}
 
-	public void updateTeacher(@Valid TeacherDTO teacherDto, UUID id) {
-		Optional<Teacher> teacherActualy = teacherRepository.findById(id);
+	public void updateTeacher(@Valid TeacherDTO teacherDto) {
+		Optional<Teacher> teacherActualy = teacherRepository.findById(teacherDto.getId());
 		
 		if(!teacherActualy.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Teacher Not found.");
 		
