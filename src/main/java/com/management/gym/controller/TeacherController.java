@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/teacher")
 @RestController
+@CrossOrigin("*")
 public class TeacherController {
 	
 	private final TeacherService teacherService;
@@ -48,7 +50,7 @@ public class TeacherController {
 			@ApiResponse(responseCode = "400", description = "Teacher Not Found!"),
 			@ApiResponse(responseCode = "500", description = "Error Intern")
 	})
-	@GetMapping("//by-id")
+	@GetMapping("/by-id")
 	@Operation(summary = "List a teacher by (ID).", tags = {"Teacher"})
 	public ResponseEntity<TeacherDTO> listTeacherById(@RequestParam("id") UUID id){
 		return ResponseEntity.ok().body(teacherService.listById(id));

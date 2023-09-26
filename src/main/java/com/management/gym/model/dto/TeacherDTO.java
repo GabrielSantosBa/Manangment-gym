@@ -20,9 +20,9 @@ import lombok.Setter;
 @Builder
 public class TeacherDTO {
 	
-	@NotBlank(message = "id cannot be null.")
 	private UUID id;
 	
+	@NotBlank(message = "name cannot be null.")
 	private String name;
 	
 	private List<Contacts> contacts;
