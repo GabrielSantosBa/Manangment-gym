@@ -1,5 +1,6 @@
 FROM openjdk:11-jdk-slim
 VOLUME /tmp
-COPY target/*jar gym.jar
-ENTRYPOINT ["java","-jar","/gym.jar"]
+COPY --from=build /target/management-gym-0.0.1-SNAPSHOT.jar gym.jar
+# ENV PORT=8080
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","gym.jar"]
