@@ -1,11 +1,10 @@
 package com.management.gym.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,7 +15,7 @@ public interface StudentRepository extends JpaRepository<Student, UUID>{
 //	@Query(value = "SELECT * FROM tb_students student WHERE student.situation_training = ?1", nativeQuery = true)
 //	public Page<Student> findStudentStatus(boolean status, Pageable pageable);
 	
-	public Page<Student> findStudentByStatus(boolean status, Pageable pageable);
+	public List<Student> findStudentByStatus(boolean status);
 	
 	
 	@Query(value = "SELECT * FROM tb_students student "

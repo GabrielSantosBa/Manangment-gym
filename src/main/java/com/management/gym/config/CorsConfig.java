@@ -20,29 +20,13 @@ public class CorsConfig extends CorsFilter{
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				CorsRegistration cors = registry.addMapping("/**");
-				cors.allowedMethods("GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS");
+				CorsRegistration cors = registry.addMapping("http://localhost:4200/");
+				cors.allowedMethods("*");
 				cors.allowedOrigins("*");
 				cors.allowedHeaders("*");
+				cors.allowCredentials(false);
+				cors.maxAge(3600);
 			}
 		};
 	}
-
-//	private static UrlBasedCorsConfigurationSource configurationSource() {
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		CorsConfiguration config = new CorsConfiguration();
-//		config.setAllowCredentials(true);
-//		config.addAllowedOrigin("*");
-//		config.addAllowedHeader("*");
-//		config.addAllowedMethod("OPTIONS");
-//		config.addAllowedMethod("HEAD");
-//		config.addAllowedMethod("GET");
-//		config.addAllowedMethod("PUT");
-//		config.addAllowedMethod("POST");
-//		config.addAllowedMethod("DELETE");
-//		config.addAllowedMethod("PATCH");
-//		config.addAllowedMethod("CONNECT");
-//		source.registerCorsConfiguration("/**", config);
-//		return source;
-//	}
 }

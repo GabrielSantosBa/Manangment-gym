@@ -1,16 +1,13 @@
 package com.management.gym.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
-import org.springdoc.api.annotations.ParameterObject;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/student")
 @RestController
-@CrossOrigin("http://localhost:4200")
 public class StudentController {
 	
 	private final StudentService studentService;
@@ -42,12 +38,13 @@ public class StudentController {
 	
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Operation Success"),
-			@ApiResponse(responseCode = "500", description = "Erro Return All Students")
+			@ApiResponse(responseCode = "204", description = "Erro Return All Students"),
+			@ApiResponse(responseCode = "500", description = "Server Error")
 	})
 	@GetMapping
 	@Operation(summary = "Lists all students in database", tags = {"Student"})
-	public Page<Student> listsAllStudents(@ParameterObject Pageable pageable){
-		return studentService.listAllStudents(pageable);
+	public ResponseEntity<List<Student>> listsAllStudents(){
+		return   ResponseEntity.ok(studentService.listAllStudents());
 	}
 	
 	@ApiResponses(value = {
@@ -56,8 +53,8 @@ public class StudentController {
 	})
 	@GetMapping("/situation")
 	@Operation(summary = "Lists a student by situation training(active or inative) in the gym.", tags = {"Student"})
-	public Page<Student> listsStudentsByStatus(@RequestParam("status") boolean status, Pageable pageable){
-		return studentService.listStudentsBy(status,pageable);
+	public List<Student> listsStudentsByStatus(@RequestParam("status") boolean status){
+		return studentService.listStudentsBy(status);
 	}
 	
 	@ApiResponses(value = {

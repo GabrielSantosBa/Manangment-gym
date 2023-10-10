@@ -1,6 +1,7 @@
 package com.management.gym.service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.management.gym.common.Utilities;
@@ -39,12 +41,15 @@ public class StudentService  {
 	private final Utilities methodUtil;
 	
 	
-	public Page<Student> listStudentsBy( boolean status, Pageable pageable ){
-		return studentRepository.findStudentByStatus( status, pageable );
+	public List<Student> listStudentsBy( boolean status){
+		return studentRepository.findStudentByStatus( status);
 	}
 	
-	public Page<Student> listAllStudents( Pageable pageable ) {
-		return studentRepository.findAll( pageable );
+	public List<Student> listAllStudents() {
+		if(CollectionUtils.isEmpty(studentRepository.findAll())) {
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No Data Show!");
+		}
+		return studentRepository.findAll();
 	}
 	
 	public StudentDTO listById( UUID id ) {
