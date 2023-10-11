@@ -26,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 public class TeacherService {
 
 	private final TeacherRepository teacherRepository;
-	private final ContactRepository contactsRepository;
 	private final Utilities methodUtil;
 	
 
@@ -51,8 +50,6 @@ public class TeacherService {
 	
 	public TeacherDTO createTeacher(@Valid TeacherDTO teacherDto) {
 		
-		teacherDto.setContacts(contactsRepository.saveAll(teacherDto.getContacts()));
-		
 		var teacherEntity = (Teacher) methodUtil.convertTo(teacherDto, Teacher.class);
 		
 		teacherRepository.save(teacherEntity);
@@ -65,10 +62,8 @@ public class TeacherService {
 		
 		if(!teacherActualy.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Teacher Not found.");
 		
-		BeanUtils.copyProperties(teacherDto.getContacts(), teacherActualy.get().getContacts());		
 		BeanUtils.copyProperties(teacherDto, teacherActualy.get());
 		
-		contactsRepository.saveAll(teacherActualy.get().getContacts());		
 		teacherRepository.save(teacherActualy.get());
 	}
 

@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +41,10 @@ public class Teacher implements Serializable{
 	@NotBlank
 	private String name;
 	
-	@OneToMany
-	@JoinColumn(name = "FK_TEACHER")
-	private List<Contacts> contacts;	
+	@Size(min = 3, max = 100)
+	@Schema(description = "Link or identifier of social network", example = "@Example or https://www.linkedin.com/in/gabriel-santosba/")
+	private String socialNetwork;
+	
+	@Size(max = 12)	
+	private String numberPhone;		
 }
