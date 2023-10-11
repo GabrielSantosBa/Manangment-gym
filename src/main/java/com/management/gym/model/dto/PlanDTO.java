@@ -18,11 +18,12 @@ import lombok.Setter;
 @Builder
 public class PlanDTO {
 	
-	@NotBlank
 	private UUID id;
 	
+	@NotBlank(message = "Name plan cannot be null!")
 	private String namePlan;
 	
+	@NotBlank(message = "Value Plan cannot be null!")
 	private BigDecimal valuePlan;
 	
 }
