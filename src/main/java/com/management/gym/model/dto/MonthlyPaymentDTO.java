@@ -28,7 +28,7 @@ public class MonthlyPaymentDTO {
 	@Schema(description = "Forma de Pagamento", example = "PIX(1), CREDIT_CARD(2), DEBIT_CARD(3), TRANSFER(4), MONEY(5)")
 	private Integer formOfPayment;
 	
-	@NotBlank(message = "Payment cannot be null")
+	//@NotBlank(message = "Payment cannot be null")
 	private BigDecimal monthlyfee;
 	
 	@NotBlank(message = "Payment Date cannot be null")
