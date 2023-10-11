@@ -23,7 +23,7 @@ public class PlanDTO {
 	@NotBlank(message = "Name plan cannot be null!")
 	private String namePlan;
 	
-	@NotBlank(message = "Value Plan cannot be null!")
+	//@NotBlank(message = "Value Plan cannot be null!")
 	private BigDecimal valuePlan;
 	
 }
