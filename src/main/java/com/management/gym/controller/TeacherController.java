@@ -1,7 +1,6 @@
 package com.management.gym.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -49,7 +48,7 @@ public class TeacherController {
 	})
 	@GetMapping("/by-id")
 	@Operation(summary = "List a teacher by (ID).", tags = {"Teacher"})
-	public ResponseEntity<TeacherDTO> listTeacherById(@RequestParam("id") UUID id){
+	public ResponseEntity<TeacherDTO> listTeacherById(@RequestParam("id") Long id){
 		return ResponseEntity.ok().body(teacherService.listById(id));
 	}
 	
@@ -82,7 +81,7 @@ public class TeacherController {
 	})
 	@DeleteMapping
 	@Operation(summary = "Delete a teacher in database).", tags = {"Teacher"})
-	public ResponseEntity<String> deleteTeacher(@RequestParam("id") UUID id){
+	public ResponseEntity<String> deleteTeacher(@RequestParam("id") Long id){
 		teacherService.deleteTeacher(id);
 		return ResponseEntity.status(HttpStatus.OK).body("Registry Deleted Successfully!");
 	}

@@ -1,7 +1,6 @@
 package com.management.gym.model.dto;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
 
@@ -18,7 +17,7 @@ import lombok.Setter;
 @Builder
 public class PlanDTO {
 	
-	private UUID id;
+	private Long id;
 	
 	@NotBlank(message = "Name plan cannot be null!")
 	private String namePlan;

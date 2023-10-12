@@ -17,18 +17,18 @@ public class StudentBuilder {
 	
 	public static Student createStudent() {
 		return Student.builder()
-				.id(UUID.fromString("b269ae57-31e2-44ec-bbb2-3b240a697337"))
+				.id(2L)
 				.name("Sanji Perna Preta")
 				.birthDate(LocalDate.now().minusYears(10))
 				.contacts(createContacts())
 				.measurements(createMeasurement())
-				.sexoEnum(1)
+				.sexo("Feminino")
 				.build();
 	}
 	
 	public static StudentDTO createStudentDTO() {
 		return StudentDTO.builder()
-				.id(UUID.fromString("b269ae57-31e2-44ec-bbb2-3b240a697337"))
+				.id(2L)
 				.birthDate(LocalDate.now().minusYears(10))
 				.contacts(createContacts())
 				.name("monkey D. Luffy")
@@ -37,7 +37,7 @@ public class StudentBuilder {
 	
 	public static StudentMeasurementDTO createStudentMeasurementDTO() {
 		return StudentMeasurementDTO.builder()
-				.id(UUID.fromString("b269ae57-31e2-44ec-bbb2-3b240a697337"))
+				.id(2L)
 				.name("Shanks O Ruivo")
 				.Measurements(createMeasurementDTO()).build();
 	}
@@ -55,7 +55,7 @@ public class StudentBuilder {
 	public static List<Measurement> createMeasurement() {
 		List<Measurement> measurement = new ArrayList<>();
 		measurement.add(Measurement.builder()
-				.id(UUID.randomUUID())
+				.id(1L)
 				.biceps(90.0)
 				.breastplate(190)
 				.height(2.70)
@@ -70,7 +70,7 @@ public class StudentBuilder {
 	public static List<MeasurementDTO> createMeasurementDTO() {
 		List<MeasurementDTO> measurementDTO = new ArrayList<>();
 		measurementDTO.add(MeasurementDTO.builder()
-				.id(UUID.fromString("b269ae57-31e2-44ec-bbb2-3b240a697337"))
+				.id(2L)
 				.height(200)
 				.weight(300)
 				.biceps(200)

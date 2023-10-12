@@ -1,9 +1,9 @@
 package com.management.gym.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-import static java.util.stream.Collectors.*;
 
 import javax.validation.Valid;
 
@@ -38,7 +38,7 @@ public class PlanService {
 		return listPlanDTO;
 	}
 
-	public PlanDTO listById(UUID id) {
+	public PlanDTO listById(Long id) {
 		Optional<Plan> planReturn = planRepository.findById(id);
 		
 		if(!planReturn.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "plan Not found.");
@@ -64,7 +64,7 @@ public class PlanService {
 		planRepository.save(planActualy.get());
 	}
 
-	public void deleteplan(UUID id) {
+	public void deleteplan(Long id) {
 		boolean existsById = planRepository.existsById(id);
 		
 		if(!existsById) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "plan Not found.");

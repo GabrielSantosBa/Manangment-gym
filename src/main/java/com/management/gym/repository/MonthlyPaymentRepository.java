@@ -1,18 +1,13 @@
 package com.management.gym.repository;
 
-import java.util.UUID;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.management.gym.model.MonthlyPayment;
-import com.management.gym.model.Student;
-import com.management.gym.model.dto.MonthlyPaymentDTO;
 
-public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment, UUID>{
+public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment, Long>{
 
 	
 	//TODO fazer testes de performance com o FETCH JOIN
@@ -28,7 +23,7 @@ public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment, 
 			+ "	INNER JOIN tb_students student on payment.fk_student = student.id_student "
 			+ "	WHERE payment.financial_status_cod = ?1"
 			+ "	AND student.id_student = ?2", nativeQuery = true)
-	Page<MonthlyPayment> findByFinancialStatusCodAndStudent(Integer financialStatus, UUID id, Pageable pageable);
+	Page<MonthlyPayment> findByFinancialStatusCodAndStudent(Integer financialStatus, Long id, Pageable pageable);
 	
 	
 //	@Query("SELECT new com.management.gym.model.dto.MonthlyPaymentDTO(payment.financialStatusEnum, payment.formOfPayment, payment.monthlyfee, student.birthDate, student.name)"

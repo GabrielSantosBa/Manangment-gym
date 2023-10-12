@@ -1,7 +1,5 @@
 package com.management.gym.controller;
 
-import java.util.UUID;
-
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -40,7 +38,7 @@ public class MonthlyPaymentController {
 	@GetMapping
 	public Page<MonthlyPaymentDTO> findMonthlyPaymentByStudentAndFinancialStatus(
 			@RequestParam("financialStatus") Integer financialCod, Pageable pageable,
-			@RequestParam("idStudent") UUID idStudent){
+			@RequestParam("idStudent") Long idStudent){
 		return monthlyPaymentService.findStudentsWithStatusPayment(financialCod, idStudent, pageable);
 	}
 	

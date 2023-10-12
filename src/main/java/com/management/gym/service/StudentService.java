@@ -3,14 +3,11 @@ package com.management.gym.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -41,8 +38,8 @@ public class StudentService  {
 	private final Utilities methodUtil;
 	
 	
-	public List<Student> listStudentsBy( boolean status){
-		return studentRepository.findStudentByStatus( status);
+	public List<Student> listStudentsBy( String situation){
+		return studentRepository.findStudentBySituation( situation);
 	}
 	
 	public List<Student> listAllStudents() {
@@ -52,13 +49,13 @@ public class StudentService  {
 		return studentRepository.findAll();
 	}
 	
-	public StudentDTO listById( UUID id ) {
+	public StudentDTO listById( Long id ) {
 		Optional<Student> student = studentRepository.findById( id );
 		if(!student.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
 		return modelMapper.map(student.get(), StudentDTO.class);   
 	}
 
-	public StudentMeasurementDTO listMeasurementByPeriod(LocalDate iniDate, LocalDate finalDate, UUID id) {
+	public StudentMeasurementDTO listMeasurementByPeriod(LocalDate iniDate, LocalDate finalDate, Long id) {
 		var studentMeasurment = studentRepository.findMeasurementByDateMeasurement(iniDate, finalDate, id);
 		if(!studentMeasurment.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
 		
@@ -86,7 +83,7 @@ public class StudentService  {
 		
 	}
 
-	public void addUpdateMeasurement(@Valid MeasurementDTO measurementDTO, UUID id) {
+	public void addUpdateMeasurement(@Valid MeasurementDTO measurementDTO, Long id) {
 		Optional<Student> student = studentRepository.findById(id);
 		if(!student.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
 		

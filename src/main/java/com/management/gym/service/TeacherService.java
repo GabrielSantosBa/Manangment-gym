@@ -1,9 +1,9 @@
 package com.management.gym.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-import static java.util.stream.Collectors.*;
 
 import javax.validation.Valid;
 
@@ -16,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.management.gym.common.Utilities;
 import com.management.gym.model.Teacher;
 import com.management.gym.model.dto.TeacherDTO;
-import com.management.gym.repository.ContactRepository;
 import com.management.gym.repository.TeacherRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -39,7 +38,7 @@ public class TeacherService {
 		return listTeacherDTO;
 	}
 
-	public TeacherDTO listById(UUID id) {
+	public TeacherDTO listById(Long id) {
 		Optional<Teacher> teacherReturn = teacherRepository.findById(id);
 		
 		if(!teacherReturn.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Teacher Not found.");
@@ -48,7 +47,7 @@ public class TeacherService {
 	}
 
 	
-	public TeacherDTO createTeacher(@Valid TeacherDTO teacherDto) {
+	public TeacherDTO createTeacher(@Valid TeacherDTO teacherDto) {// Validar validations - Bolar estretegia
 		
 		var teacherEntity = (Teacher) methodUtil.convertTo(teacherDto, Teacher.class);
 		
@@ -67,7 +66,7 @@ public class TeacherService {
 		teacherRepository.save(teacherActualy.get());
 	}
 
-	public void deleteTeacher(UUID id) {
+	public void deleteTeacher(Long id) {
 		
 		boolean existsById = teacherRepository.existsById(id);
 		

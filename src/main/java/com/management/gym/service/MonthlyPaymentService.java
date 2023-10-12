@@ -3,7 +3,6 @@ package com.management.gym.service;
 import static java.util.stream.Collectors.toList;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
@@ -32,7 +31,7 @@ public class MonthlyPaymentService  {
 	private final Utilities methodsUtil;
 
 	
-	public Page<MonthlyPaymentDTO> findStudentsWithStatusPayment(Integer financialCod, UUID idStudent, Pageable pageable) {
+	public Page<MonthlyPaymentDTO> findStudentsWithStatusPayment(Integer financialCod, Long idStudent, Pageable pageable) {
 		Page<MonthlyPayment> monthlyPaymentEntity = monthlyPaymentRepository.findByFinancialStatusCodAndStudent(financialCod, idStudent, pageable);
 		
 		if(ObjectUtils.isEmpty(monthlyPaymentEntity)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error");
@@ -47,8 +46,8 @@ public class MonthlyPaymentService  {
 
 	public MonthlyPaymentDTO createMonthlyPaymentStudent(MonthlyPaymentDTO monthlyPaymentDTO) {
 		
-		Optional<Student> student = studentRepository.findById(UUID.fromString(monthlyPaymentDTO.getStudentId()));
-		if(!student.isPresent()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error");
+		Optional<Student> student = studentRepository.findById(monthlyPaymentDTO.getStudentId());
+		if(!student.isPresent()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error:  Student not found!");
 		
 		var monthlyPaymentEntity = (MonthlyPayment) methodsUtil.convertTo(monthlyPaymentDTO, MonthlyPayment.class);
 		monthlyPaymentEntity.setStudent(student.get());

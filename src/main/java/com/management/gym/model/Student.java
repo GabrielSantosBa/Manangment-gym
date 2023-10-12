@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -44,13 +44,17 @@ public class Student implements Serializable{
 	@Id 
 	@GeneratedValue
 	@Column(name = "id_student")
-	private UUID id;	
+	private Long id;
+	
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "matricula")	
+//	private Long numberRegistry;
 	
 	@NotBlank(message = "Name Cannot Be Null")
 	@Size(min = 3, max = 100, message = "Verify the size name!")
 	private String name;
 	
-	private int sexoEnum;	
+	private String sexo;	
 	
 	@OneToMany
 	@JoinColumn(name = "FK_STUDENT")
@@ -63,22 +67,25 @@ public class Student implements Serializable{
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate birthDate;
 	
-	@Column(name = "situation_training", columnDefinition = "boolean default true")
-	private boolean status;//TODO validar forma de inicialização
+	@Column(name = "situation_training")
+	private String situation;
 	
 	@Schema(description = "Value will be used via routine", required = false)
-	private Integer paymentStatus;
+	private String paymentStatus;
+	
+	@OneToOne
+	@JoinColumn(name = "FK_PLAN")
+	private Plan plan;
 	
 	public void setValuePaymentStatus(FinancialStatusEnum statusEnum) {
 		if(Objects.nonNull(statusEnum)) {
-			this.paymentStatus = statusEnum.getCode();
+			this.paymentStatus = statusEnum.name();
 		}
 	}
 	
 	public void setSexoEnum(SexoEnum sexoEnum) {
 		if(Objects.nonNull(sexoEnum)) {
-			this.sexoEnum = sexoEnum.getCode();
+			this.sexo = sexoEnum.name();
 		}
 	}
-	
 }

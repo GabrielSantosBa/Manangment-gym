@@ -2,7 +2,6 @@ package com.management.gym.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +33,7 @@ public class Measurement implements Serializable {
 	@GeneratedValue
 	@EqualsAndHashCode.Include
 	@Column(name = "id_measurement")
-	private UUID id;
+	private Long id;
 	
 	@Range(min = 0, max = 4)
 	private double height;

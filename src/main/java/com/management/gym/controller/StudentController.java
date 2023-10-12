@@ -2,7 +2,6 @@ package com.management.gym.controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -53,8 +52,8 @@ public class StudentController {
 	})
 	@GetMapping("/situation")
 	@Operation(summary = "Lists a student by situation training(active or inative) in the gym.", tags = {"Student"})
-	public List<Student> listsStudentsByStatus(@RequestParam("status") boolean status){
-		return studentService.listStudentsBy(status);
+	public List<Student> listsStudentsByStatus(@RequestParam("situation") String situation){
+		return studentService.listStudentsBy(situation);
 	}
 	
 	@ApiResponses(value = {
@@ -64,7 +63,7 @@ public class StudentController {
 	})
 	@GetMapping("/by-id")
 	@Operation(summary = "List a student by (ID).", tags = {"Student"})
-	public ResponseEntity<StudentDTO> listStudentsById(@RequestParam("id") UUID id){
+	public ResponseEntity<StudentDTO> listStudentsById(@RequestParam("id") Long id){
 		return ResponseEntity.ok().body(studentService.listById(id));
 	}
 	
@@ -76,7 +75,7 @@ public class StudentController {
 	@GetMapping("/measurements")
 	@Operation(summary = "Returns measurements of a student for a given period", tags = {"Student"})
 	public ResponseEntity<StudentMeasurementDTO> findStudentMeasurementByPeriod(
-			@RequestParam(value = "id") UUID id, 
+			@RequestParam(value = "id") Long id, 
 			@RequestParam(value = "minPeriod") LocalDate minPeriod,
 			@RequestParam(value = "maxPeriod") LocalDate maxPeriod){
 		
@@ -112,7 +111,7 @@ public class StudentController {
 	})
 	@PutMapping("/measurements")
 	@Operation(summary = "Updates a student's measurements in the database.", tags = {"Student"})
-	public ResponseEntity<Void> addMeasurement(@RequestBody @Valid MeasurementDTO measurementDTO, @RequestParam("id") UUID id){
+	public ResponseEntity<Void> addMeasurement(@RequestBody @Valid MeasurementDTO measurementDTO, @RequestParam("id") Long id){
 		studentService.addUpdateMeasurement(measurementDTO,id);
 		return ResponseEntity.noContent().build();
 	}

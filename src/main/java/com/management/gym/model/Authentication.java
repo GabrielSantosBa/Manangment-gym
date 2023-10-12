@@ -1,7 +1,6 @@
 package com.management.gym.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +29,7 @@ public class Authentication implements Serializable{
 	@Id 
 	@GeneratedValue
 	@Column(name = "id_authentication")
-	private UUID id;	
+	private Long id;	
 	
 	private String password;	
 	

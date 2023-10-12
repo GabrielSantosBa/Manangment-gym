@@ -3,8 +3,6 @@ package com.management.gym.model.dto;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -31,16 +29,16 @@ public class MonthlyPaymentDTO {
 	//@NotBlank(message = "Payment cannot be null")
 	private BigDecimal monthlyfee;
 	
-	@NotBlank(message = "Payment Date cannot be null")
+	//@NotBlank(message = "Payment Date cannot be null")
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate paymentDate;
 	
-	@NotBlank
+	//@NotBlank
 	@Schema(description = "Status financeiro ", example = "IN_DAY(1), LATE(2), TO_WIN(3)")
 	private Integer financialStatusCod;
 	
-	@NotBlank
-	private String studentId;
+	//@NotBlank
+	private Long studentId;
 	
 }

@@ -13,7 +13,7 @@ public class MonthlyPaymentBuilder {
 		.financialStatusCod(1)
 		.formOfPayment(1)
 		.monthlyfee(new BigDecimal(49.99))
-		.studentId("UUID.randomUUID()")
+		.studentId(1L)
 		.build();
 	}
 }

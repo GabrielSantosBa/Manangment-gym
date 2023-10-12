@@ -1,7 +1,6 @@
 package com.management.gym.model.dto;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @JsonInclude(content = Include.NON_NULL)
 public class StudentMeasurementDTO {
 
-	private UUID id;
+	private Long id;
 	private String name;
 	
 	private List<MeasurementDTO> Measurements;

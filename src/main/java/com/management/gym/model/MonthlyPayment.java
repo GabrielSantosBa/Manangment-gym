@@ -3,7 +3,6 @@ package com.management.gym.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +37,7 @@ public class MonthlyPayment implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "id_monthly_payment")
-	private UUID id;
+	private Long id;
 
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "dd/MM/yyyy")
