@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class DailyAccounting implements Serializable{
 	
 	@EqualsAndHashCode.Include	
 	@Id 
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_daily_accounting")
 	private Long id;	
 	

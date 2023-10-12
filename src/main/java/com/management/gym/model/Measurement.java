@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.Range;
@@ -30,7 +31,7 @@ public class Measurement implements Serializable {
 
 
 	@Id 
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	@Column(name = "id_measurement")
 	private Long id;

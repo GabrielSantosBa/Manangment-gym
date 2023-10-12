@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -42,13 +43,9 @@ public class Student implements Serializable{
 	
 	@EqualsAndHashCode.Include	
 	@Id 
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_student")
 	private Long id;
-	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "matricula")	
-//	private Long numberRegistry;
 	
 	@NotBlank(message = "Name Cannot Be Null")
 	@Size(min = 3, max = 100, message = "Verify the size name!")
