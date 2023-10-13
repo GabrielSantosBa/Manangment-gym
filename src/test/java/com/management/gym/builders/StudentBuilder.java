@@ -31,7 +31,7 @@ public class StudentBuilder {
 				.birthDate(LocalDate.now().minusYears(10))
 				.contacts(createContacts())
 				.name("monkey D. Luffy")
-				.status(true).build();
+				.situation("Ativo").build();
 	}
 	
 	public static StudentMeasurementDTO createStudentMeasurementDTO() {

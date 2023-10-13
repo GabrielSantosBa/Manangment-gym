@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.management.gym.model.Contacts;
+import com.management.gym.model.Plan;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,8 @@ public class StudentDTO {
 	
 	private LocalDate birthDate;
 	
-	private boolean status;
+	private String situation;
 	
+	private Plan plan;
 	
 }

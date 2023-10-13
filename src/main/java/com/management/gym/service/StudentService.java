@@ -21,6 +21,7 @@ import com.management.gym.model.dto.StudentDTO;
 import com.management.gym.model.dto.StudentMeasurementDTO;
 import com.management.gym.repository.ContactRepository;
 import com.management.gym.repository.MeasurementRepository;
+import com.management.gym.repository.PlanRepository;
 import com.management.gym.repository.StudentRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,8 @@ public class StudentService  {
 	private static final String STUDENT_NOT_FOUND = "Student not found!";
 	private final StudentRepository studentRepository;
 	private final MeasurementRepository measurementRepository;	
-	private final ContactRepository contactStudentRepository;	
+	private final ContactRepository contactStudentRepository;
+	private final PlanRepository planRepository;
 	private final ModelMapper modelMapper;
 	private final Utilities methodUtil;
 	
@@ -71,10 +73,12 @@ public class StudentService  {
 	public void updateStudent(StudentDTO student) {
 		
 		Optional<Student> studentFound = studentRepository.findById(student.getId());
-		if(!studentFound.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, STUDENT_NOT_FOUND);
+		if(!studentFound.isPresent()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, STUDENT_NOT_FOUND);
 		try {
 			BeanUtils.copyProperties(student, studentFound.get());
 			BeanUtils.copyProperties(student.getContacts(), studentFound.get().getContacts());
+			BeanUtils.copyProperties(student.getPlan(), studentFound.get().getPlan());
+			planRepository.save(student.getPlan());
 			studentRepository.save(studentFound.get());
 			contactStudentRepository.saveAll(student.getContacts());
 		} catch (RuntimeException err) {
