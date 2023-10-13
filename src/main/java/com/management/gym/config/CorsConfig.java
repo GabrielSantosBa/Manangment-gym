@@ -20,9 +20,9 @@ public class CorsConfig extends CorsFilter{
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				CorsRegistration cors = registry.addMapping("/**");
+				CorsRegistration cors = registry.addMapping("http://localhost:4200");
 				cors.allowedMethods("*");
-				cors.allowedOrigins("http://localhost:4200");
+				cors.allowedOrigins("*");
 				cors.allowedHeaders("*");
 				cors.allowCredentials(false);
 				cors.maxAge(3600);

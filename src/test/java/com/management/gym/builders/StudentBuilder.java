@@ -3,7 +3,6 @@ package com.management.gym.builders;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import com.management.gym.model.Contacts;
 import com.management.gym.model.Measurement;
@@ -45,7 +44,7 @@ public class StudentBuilder {
 	protected static List<Contacts> createContacts() {
 		List<Contacts> contatos = new ArrayList<>();
 		contatos.add(Contacts.builder()
-				.id(UUID.randomUUID())
+				.id(1L)
 				.email("chapeu-palha@onepeace.haki")
 				//.socialNetwork("@chapeuDePalha-Oficial")
 				.numberPhone("75988806416").build());
