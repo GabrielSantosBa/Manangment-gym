@@ -2,10 +2,7 @@ package com.management.gym.service;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,10 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import com.management.gym.builders.StudentBuilder;
 import com.management.gym.model.Student;
@@ -124,18 +117,18 @@ class StudentServiceTest {
 	@Test
 	void testCreateStudent() {
 		when(studentRepository.save(student)).thenReturn(student);
-		when(contactStudentRepository.saveAll(student.getContacts())).thenReturn(student.getContacts());
+		when(contactStudentRepository.save(student.getContact())).thenReturn(student.getContact());
 		when(measurementRepository.saveAll(student.getMeasurements())).thenReturn(student.getMeasurements());
 		
-		student.setContacts(contactStudentRepository.saveAll(student.getContacts()));
+		student.setContact(contactStudentRepository.save(student.getContact()));
 		student.setMeasurements(measurementRepository.saveAll(student.getMeasurements()));
 		
 		Student studentCreated = studentService.createStudent(student);
 		
 		assertNotNull(studentCreated);
-		assertNotNull(studentCreated.getContacts());
+		assertNotNull(studentCreated.getContact());
 		assertNotNull(studentCreated.getMeasurements());
-		assertTrue(student.getContacts().size() == studentCreated.getContacts().size());
+		assertTrue(student.getContact().getId() == studentCreated.getContact().getId());
 		assertTrue(student.getMeasurements().size() == studentCreated.getMeasurements().size());
 		
 	}

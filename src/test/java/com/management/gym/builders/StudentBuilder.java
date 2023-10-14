@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.management.gym.model.Contacts;
+import com.management.gym.model.Contact;
 import com.management.gym.model.Measurement;
 import com.management.gym.model.Student;
 import com.management.gym.model.dto.MeasurementDTO;
@@ -19,7 +19,7 @@ public class StudentBuilder {
 				.id(2L)
 				.name("Sanji Perna Preta")
 				.birthDate(LocalDate.now().minusYears(10))
-				.contacts(createContacts())
+				.contact(createContact())
 				.measurements(createMeasurement())
 				.sexo("Feminino")
 				.build();
@@ -29,7 +29,7 @@ public class StudentBuilder {
 		return StudentDTO.builder()
 				.id(2L)
 				.birthDate(LocalDate.now().minusYears(10))
-				.contacts(createContacts())
+				.contact(createContact())
 				.name("monkey D. Luffy")
 				.situation("Ativo").build();
 	}
@@ -41,14 +41,13 @@ public class StudentBuilder {
 				.Measurements(createMeasurementDTO()).build();
 	}
 
-	protected static List<Contacts> createContacts() {
-		List<Contacts> contatos = new ArrayList<>();
-		contatos.add(Contacts.builder()
+	protected static Contact createContact() {
+		return Contact.builder()
 				.id(1L)
 				.email("chapeu-palha@onepeace.haki")
-				//.socialNetwork("@chapeuDePalha-Oficial")
-				.numberPhone("75988806416").build());
-		return contatos;
+				.socialNetwork("@chapeuDePalha-Oficial")
+				.numberPhone("75988806416").build();
+		
 	}
 	
 	public static List<Measurement> createMeasurement() {

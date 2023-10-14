@@ -65,7 +65,7 @@ public class StudentService  {
 	}
 
 	public Student createStudent(Student student) {
-		student.setContacts(contactStudentRepository.saveAll(student.getContacts()));
+		student.setContact(contactStudentRepository.save(student.getContact()));
 		student.setMeasurements(measurementRepository.saveAll(student.getMeasurements()));
 		return studentRepository.save(student);
 	}
@@ -76,11 +76,11 @@ public class StudentService  {
 		if(!studentFound.isPresent()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, STUDENT_NOT_FOUND);
 		try {
 			BeanUtils.copyProperties(student, studentFound.get());
-			BeanUtils.copyProperties(student.getContacts(), studentFound.get().getContacts());
+			BeanUtils.copyProperties(student.getContact(), studentFound.get().getContact());
 			BeanUtils.copyProperties(student.getPlan(), studentFound.get().getPlan());
 			planRepository.save(student.getPlan());
 			studentRepository.save(studentFound.get());
-			contactStudentRepository.saveAll(student.getContacts());
+			contactStudentRepository.save(student.getContact());
 		} catch (RuntimeException err) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, STUDENT_NOT_FOUND, err);
 		}

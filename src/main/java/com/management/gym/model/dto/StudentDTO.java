@@ -1,9 +1,8 @@
 package com.management.gym.model.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.management.gym.model.Contacts;
+import com.management.gym.model.Contact;
 import com.management.gym.model.Plan;
 
 import lombok.AllArgsConstructor;
@@ -23,11 +22,15 @@ public class StudentDTO {
 	
 	private String name;
 	
-	private List<Contacts> contacts;
+	private String sexo;
+	
+	private Contact contact;
 	
 	private LocalDate birthDate;
 	
 	private String situation;
+	
+	private String paymentStatus;
 	
 	private Plan plan;
 	

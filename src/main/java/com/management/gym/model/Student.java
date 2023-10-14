@@ -53,9 +53,9 @@ public class Student implements Serializable{
 	
 	private String sexo;	
 	
-	@OneToMany
+	@OneToOne
 	@JoinColumn(name = "FK_STUDENT")
-	private List<Contacts> contacts;
+	private Contact contact;
 	
 	@OneToMany
 	@JoinColumn(name = "FK_STUDENT")
