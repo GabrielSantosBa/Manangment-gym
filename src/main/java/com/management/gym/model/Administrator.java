@@ -1,12 +1,15 @@
 package com.management.gym.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,5 +39,9 @@ public class Administrator implements Serializable{
 	
 	private String sexo;
 	
-	private String creci;
+	private String creci;	
+	
+	@OneToMany
+	@JoinColumn(name = "FK_AUTHENTICATION")
+	private List<Authentication> authentication;
 }

@@ -18,9 +18,9 @@ public class CorsConfig extends CorsFilter{
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				CorsRegistration cors = registry.addMapping("http://localhost:4200/");
+				CorsRegistration cors = registry.addMapping("https://gym-management2-6135.vercel.app/");
 				cors.allowedMethods("*");
-				cors.allowedOrigins("*");
+				cors.allowedOrigins("https://gym-management2-6135.vercel.app/api/", "https://gym-management2-6135.vercel.app/api", "https://gym-management2-6135.vercel.app");
 				cors.allowedHeaders("*");
 				cors.allowCredentials(false);
 				cors.maxAge(3600);
