@@ -47,7 +47,7 @@ public class StudentController {
 	@GetMapping
 	@Operation(summary = "Lists all students in database", tags = {"Student"})
 	public ResponseEntity<List<Student>> listsAllStudents(){
-		return ResponseEntity.ok().cacheControl(CacheControl.maxAge(3600, TimeUnit.SECONDS)).body(studentService.listAllStudents());
+		return ResponseEntity.ok().cacheControl(CacheControl.empty().noCache()).body(studentService.listAllStudents());
 	}
 	
 	@ApiResponses(value = {
