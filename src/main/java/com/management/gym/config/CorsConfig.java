@@ -18,7 +18,7 @@ public class CorsConfig extends CorsFilter{
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				CorsRegistration cors = registry.addMapping("https://gym-management2-6135.vercel.app/api");				
+				CorsRegistration cors = registry.addMapping("https://gym-management2-fjmn.vercel.app/");				
 				cors.allowedMethods("*");
 				cors.allowedOrigins("*");
 				cors.allowedHeaders("*");

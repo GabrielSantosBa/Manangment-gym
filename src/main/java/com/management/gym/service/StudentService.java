@@ -45,9 +45,7 @@ public class StudentService  {
 	}
 	
 	public List<Student> listAllStudents() {
-		if(CollectionUtils.isEmpty(studentRepository.findAll())) {
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No Data Show!");
-		}
+		if(CollectionUtils.isEmpty(studentRepository.findAll())) throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No Data Show!");
 		return studentRepository.findAll();
 	}
 	

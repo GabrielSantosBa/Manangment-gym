@@ -2,11 +2,9 @@ package com.management.gym.controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
-import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,7 +45,7 @@ public class StudentController {
 	@GetMapping
 	@Operation(summary = "Lists all students in database", tags = {"Student"})
 	public ResponseEntity<List<Student>> listsAllStudents(){
-		return ResponseEntity.ok().cacheControl(CacheControl.empty().noCache()).body(studentService.listAllStudents());
+		return ResponseEntity.ok().body(studentService.listAllStudents());
 	}
 	
 	@ApiResponses(value = {
