@@ -81,15 +81,12 @@ public class PlanService {
 			for (Student student : listAllStudents) {
 				if(ObjectUtils.isNotEmpty(student.getPlan()) && student.getPlan().getId().equals(id)) {
 					student.setPlan(null);
-					listStudentsPlanUpdate.add(student);
-				} else {
+				} else if(planRepository.existsById(id)){
 					planRepository.deleteById(id);
 				}
 			}
 			studentRepository.saveAll(listStudentsPlanUpdate);
 		}
-		
-		planRepository.deleteById(id);
 	}
 	
 	
