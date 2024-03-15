@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -70,7 +73,7 @@ public class Student implements Serializable{
 	@Schema(description = "Value will be used via routine", required = false)
 	private String paymentStatus;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.REMOVE , fetch=FetchType.EAGER, orphanRemoval=true)
 	@JoinColumn(name = "FK_PLAN")
 	private Plan plan;
 	

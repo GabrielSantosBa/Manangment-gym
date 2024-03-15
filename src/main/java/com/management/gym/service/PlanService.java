@@ -2,8 +2,10 @@ package com.management.gym.service;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -15,8 +17,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.management.gym.common.Utilities;
 import com.management.gym.model.Plan;
+import com.management.gym.model.Student;
 import com.management.gym.model.dto.PlanDTO;
 import com.management.gym.repository.PlanRepository;
+import com.management.gym.repository.StudentRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class PlanService {
 
 	private final PlanRepository planRepository;
+	private final StudentRepository studentRepository;
 	private final Utilities methodUtil;
 
 	public List<PlanDTO>findAllPlans() {
@@ -68,6 +73,21 @@ public class PlanService {
 		boolean existsById = planRepository.existsById(id);
 		
 		if(!existsById) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "plan Not found.");
+		
+		List<Student> listAllStudents = studentRepository.findAll();
+		List<Student> listStudentsPlanUpdate =  new ArrayList<>();
+		
+		if(ObjectUtils.isNotEmpty(listAllStudents)) {
+			for (Student student : listAllStudents) {
+				if(ObjectUtils.isNotEmpty(student.getPlan()) && student.getPlan().getId().equals(id)) {
+					student.setPlan(null);
+					listStudentsPlanUpdate.add(student);
+				} else {
+					planRepository.deleteById(id);
+				}
+			}
+			studentRepository.saveAll(listStudentsPlanUpdate);
+		}
 		
 		planRepository.deleteById(id);
 	}
