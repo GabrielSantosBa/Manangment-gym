@@ -15,11 +15,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 		http
 			.authorizeRequests()
-			.antMatchers("/student/**").permitAll()
-			.antMatchers("/swagger-ui/**").permitAll()
-			.antMatchers("/manangment-gym-production.up.railway.app/**").permitAll()
-			.antMatchers("/manangment-gym-production.up.railway.app/swagger-ui/**").permitAll()
-			.antMatchers("/manangment-gym-production.up.railway.app/student/**").permitAll();
+			.antMatchers("/student/**").authenticated()
+			.antMatchers("/swagger-ui/**").authenticated()
+			.antMatchers("/manangment-gym-production.up.railway.app/**").authenticated();
 	
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,6 @@ public class StudentService  {
 	private final StudentRepository studentRepository;
 	private final MeasurementRepository measurementRepository;	
 	private final ContactRepository contactStudentRepository;
-	private final PlanRepository planRepository;
 	private final ModelMapper modelMapper;
 	private final Utilities methodUtil;
 	
@@ -73,6 +73,10 @@ public class StudentService  {
 		Optional<Student> studentFound = studentRepository.findById(student.getId());
 		if(!studentFound.isPresent()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, STUDENT_NOT_FOUND);
 		try {
+			if(ObjectUtils.isNotEmpty(student.getPlan())) {
+				studentFound.get().setPlan(null);
+				studentRepository.save(studentFound.get());
+			}
 			BeanUtils.copyProperties(student, studentFound.get());
 			studentFound.get().setId(student.getId());
 			studentRepository.save(studentFound.get());
