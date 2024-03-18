@@ -15,7 +15,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 		http
 			.authorizeRequests()
-			.antMatchers("/student/**").authenticated()
+			.antMatchers("/localhost:8080/**").authenticated()
 			.antMatchers("/swagger-ui/**").authenticated()
 			.antMatchers("/manangment-gym-production.up.railway.app/**").authenticated();
 	
