@@ -14,10 +14,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 
 		http
-			.authorizeRequests()
-			.antMatchers("/localhost:8080/**").authenticated()
+			.authorizeRequests()			
 			.antMatchers("/swagger-ui/**").authenticated()
-			.antMatchers("/manangment-gym-production.up.railway.app/**").authenticated();
+			.antMatchers("/student/**").authenticated()
+			.antMatchers("/plan/**").authenticated()
+			.antMatchers("/teacher/**").authenticated()
+			.antMatchers("/daily-accounting/**").authenticated()			
+			.anyRequest().denyAll();
 	
 	}
 	

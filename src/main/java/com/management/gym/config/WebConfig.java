@@ -22,10 +22,10 @@ public class WebConfig {
 		corsConfiguration.setAllowedOrigins(all);
 		corsConfiguration.setAllowedHeaders(all);
 		corsConfiguration.setAllowedMethods(all);
-		corsConfiguration.setAllowCredentials(false);
+		corsConfiguration.setAllowCredentials(true);
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfiguration);
+		source.registerCorsConfiguration("manangment-gym-production.up.railway.app/**", corsConfiguration);
 
 		CorsFilter corsFilter = new CorsFilter(source);
 		FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>(corsFilter);		

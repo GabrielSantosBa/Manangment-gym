@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @SuppressWarnings("deprecation")
 @EnableWebSecurity
 public class SecutiryConfig extends WebSecurityConfigurerAdapter{
@@ -18,9 +19,9 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.inMemoryAuthentication()
-			.withUser("pucminas")
-			.password("597381*Deus")
-			.roles("USER", "ADMIN");
+			.withUser("admin")
+			.password("admin")
+			.roles("USER");
 	}
 	
 	
