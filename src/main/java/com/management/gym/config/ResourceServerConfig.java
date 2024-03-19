@@ -14,7 +14,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 
 		http
-			.authorizeRequests()			
+			.authorizeRequests()	
+			.antMatchers("/localhost:4200/**").authenticated()
 			.antMatchers("/swagger-ui/**").authenticated()
 			.antMatchers("/student/**").authenticated()
 			.antMatchers("/plan/**").authenticated()
