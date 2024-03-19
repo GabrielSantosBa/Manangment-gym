@@ -19,7 +19,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 			.antMatchers("/student/**").authenticated()
 			.antMatchers("/plan/**").authenticated()
 			.antMatchers("/teacher/**").authenticated()
-			.antMatchers("/daily-accounting/**").authenticated()			
+			.antMatchers("/daily-accounting/**").authenticated()
+			.antMatchers("/oauth/token").permitAll()
 			.anyRequest().denyAll();
 	
 	}
